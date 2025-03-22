@@ -1,16 +1,28 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-const show = ref(false);
+import Http from './Http.vue';
+import Socket from './Socket.vue';
 
-import { bind } from 'async-reactivity-vue';
-import * as state from './state';
+const input = ref(5);
 
-const b = bind(state.b);
+const send = async () => {
+  fetch('http://localhost:8080', {
+    method: 'PUT',
+    body: JSON.stringify({
+      input: input.value
+    })
+  });
+};
 </script>
 
 <template>
   <div>
-    <button @click="show = !show">Toggle</button>
-    <p v-if="show">Listener: {{ b }}</p>
+    <h2>Input</h2>
+    <p>
+      <input type="number" v-model="input" />
+      <button @click="send()">Send</button>
+    </p>
+    <Http />
+    <Socket />
   </div>
 </template>

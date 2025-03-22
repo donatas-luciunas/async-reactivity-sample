@@ -23,8 +23,8 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13
       async-reactivity-vue:
-        specifier: ^2.0.1
-        version: 2.0.1
+        specifier: ^2.0.2
+        version: 2.0.2
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.7.3)
@@ -385,8 +385,8 @@ packages:
   alien-signals@0.4.14:
     resolution: {integrity: sha512-itUAVzhczTmP2U5yX67xVpsbbOiquusbWVyA9N+sy6+r6YVbFkahXvNCeEPWEOMhwDYwbVbGHFkVL03N9I5g+Q==}
 
-  async-reactivity-vue@2.0.1:
-    resolution: {integrity: sha512-kuD/17Ur780dcWMr3egjRqzmPdN//DHls3VgNXy/9m0psuU2nCLaTpwIiahlSy22cCL64910BW15BZVMc+h6CA==}
+  async-reactivity-vue@2.0.2:
+    resolution: {integrity: sha512-zgKkG/PY9PnxTx2Ps3jRiYnaWSFckAvmDMPaRKUorkuFoxU4P4MNEYw0WDZJ1rqY4d+e0cVzriifRXyTS23Eig==}
 
   async-reactivity@2.0.13:
     resolution: {integrity: sha512-76cOfhrDcQkRejB5IP0c8jgLCaKv3+Ld7dYYzU3DFFP+RNitJEhacFg+xXht6515zrFvLJQEjBSaeZYoryW5RQ==}
@@ -779,7 +779,7 @@ snapshots:
 
   alien-signals@0.4.14: {}
 
-  async-reactivity-vue@2.0.1: {}
+  async-reactivity-vue@2.0.2: {}
 
   async-reactivity@2.0.13: {}
 
