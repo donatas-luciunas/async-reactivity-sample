@@ -10,10 +10,10 @@ import { ref } from 'vue';
 const show = ref(false);
 
 import { bindAwait } from 'async-reactivity-vue';
-import * as state from './httpState.js';
-const b = bindAwait(state.b, true).data;
+import * as query from './http.js';
+const b = bindAwait(query.b, true).data;
 
 const invalidate = () => {
-    state.b.forceInvalidate();
+    query.b.forceInvalidate();
 };
 </script>

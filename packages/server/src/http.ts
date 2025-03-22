@@ -1,57 +1,40 @@
-import { IncomingMessage, Server } from 'http';
-import { a } from './state.js';
-import query from './query.js';
+import { Server } from 'http';
+import { Ref, Computed } from 'async-reactivity';
+import { b } from './state.js';
 
-const getBody = async (req: IncomingMessage) => {
-    const parts: string[] = [];
+class SampleQuery {
+    public readonly invert: Ref<boolean>;
+    public readonly b: Computed<boolean>;
 
-    req.on('data', chunk => {
-        parts.push(chunk);
-    });
+    constructor() {
+        this.invert = new Ref(false);
 
-    await new Promise(resolve => req.on('end', resolve));
-
-    return JSON.parse(parts.join(''));
-};
+        this.b = new Computed(value => {
+            const i = value(this.invert);
+            if (i) {
+                return !value(b);
+            }
+            return value(b);
+        });
+    }
+}
 
 export default (server: Server) => {
     server.on('request', async (req, res) => {
-        // Set CORS headers
-        res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-        // Handle preflight request (OPTIONS)
-        if (req.method === "OPTIONS") {
-            res.writeHead(204);
-            res.end();
-            return;
-        }
-
-        if (req.method === "PUT") {
-            const body = await getBody(req);
-            a.value = body.input;
-            console.log(`a = ${body.input}`);
-            res.writeHead(204);
-            res.end();
-            return;
-        }
-
         const url = new URL(req.url!, 'http://localhost:8080');
 
         if (req.method === "GET" && url.pathname === '/') {
             const i = url.searchParams.get('invert') === 'true'
             console.log(`http | get (invert=${i})`);
-            const { invert, b } = query();
-            invert.value = i;
+            
+            const query = new SampleQuery();
+            query.invert.value = i;
+            const result = query.b.value;
+
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({
-                b: b.value
+                b: result
             }));
-            return;
         }
-
-        res.writeHead(404);
-        res.end();
     });
 };

@@ -13,8 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/ws": "^8.18.0",
-    "async-reactivity": "^2.0.17",
-    "ws": "^8.18.0"
+    "@async-reactivity-sample/core": "workspace:*",
+    "async-reactivity": "^2.0.17"
   }
 }

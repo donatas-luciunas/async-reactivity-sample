@@ -1,12 +1,11 @@
 {
-  "name": "@async-reactivity-sample/server",
+  "name": "@async-reactivity-sample/core",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/server.js",
-  "types": "types/server.js",
+  "main": "lib/index.js",
+  "types": "types/index.js",
   "type": "module",
   "scripts": {
-    "start": "node lib/server.js",
     "dev": "tsc -p src -w",
     "build": "tsc -p src"
   },
@@ -14,11 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@async-reactivity-sample/core": "workspace:*",
-    "@async-reactivity-sample/shared": "workspace:*",
-    "@types/node": "^22.13.11",
     "@types/ws": "^8.18.0",
     "async-reactivity": "^2.0.17",
+    "uuid": "^11.1.0",
     "ws": "^8.18.0"
   }
 }
