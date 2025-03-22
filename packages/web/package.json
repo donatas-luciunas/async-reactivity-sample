@@ -9,7 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "async-reactivity": "^2.0.13",
+    "@async-reactivity-sample/shared": "workspace:*",
+    "async-reactivity": "^2.0.14",
     "async-reactivity-vue": "^2.0.2",
     "vue": "^3.5.13"
   },

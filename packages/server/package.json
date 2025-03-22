@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async-reactivity": "^2.0.13",
+    "async-reactivity": "^2.0.14",
     "ws": "^8.18.0"
   }
 }

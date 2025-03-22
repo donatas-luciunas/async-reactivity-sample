@@ -1,8 +1,27 @@
-import { Listener, Watcher } from 'async-reactivity';
+import { Listener, Ref, Watcher } from 'async-reactivity';
 import { invert } from './query.js';
+import { Connection, SampleLiveQuery, ConnectionListener } from '@async-reactivity-sample/shared';
 
 const socket = new WebSocket("ws://localhost:8080");
 const opened = new Promise(resolve => socket.addEventListener("open", resolve));
+
+const connection = new Connection(socket);
+
+export class ClientSampleLiveQuery extends SampleLiveQuery {
+    b: ConnectionListener<Boolean>;
+    invert: Ref<Promise<Boolean>>;
+
+    constructor(connection: Connection) {
+        super();
+
+        this.b = new ConnectionListener<Boolean>(connection, 'b');
+        this.invert = new Ref(Promise.resolve(false));
+    }
+}
+
+const query = new ClientSampleLiveQuery(connection);
+connection.add(query);
+export default query;
 
 let listener, watcher;
 export const b = new Listener({

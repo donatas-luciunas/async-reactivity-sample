@@ -6,22 +6,35 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    devDependencies:
+      typescript:
+        specifier: ~5.7.2
+        version: 5.7.3
 
   packages/server:
     dependencies:
       async-reactivity:
-        specifier: ^2.0.13
-        version: 2.0.13
+        specifier: ^2.0.14
+        version: 2.0.14
       ws:
         specifier: ^8.18.0
         version: 8.18.0
 
-  packages/web:
+  packages/shared:
     dependencies:
       async-reactivity:
         specifier: ^2.0.13
         version: 2.0.13
+
+  packages/web:
+    dependencies:
+      '@async-reactivity-sample/shared':
+        specifier: workspace:*
+        version: link:../shared
+      async-reactivity:
+        specifier: ^2.0.14
+        version: 2.0.14
       async-reactivity-vue:
         specifier: ^2.0.2
         version: 2.0.2
@@ -390,6 +403,9 @@ packages:
 
   async-reactivity@2.0.13:
     resolution: {integrity: sha512-76cOfhrDcQkRejB5IP0c8jgLCaKv3+Ld7dYYzU3DFFP+RNitJEhacFg+xXht6515zrFvLJQEjBSaeZYoryW5RQ==}
+
+  async-reactivity@2.0.14:
+    resolution: {integrity: sha512-pQA3TUmO8AGW7uK+OsDe0UTBVdc1riMwbZfYfLWvfmEAcq+fRnfjeWA9Z2P03bIYGXXgyxtixicRgq0k3+PSQQ==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -782,6 +798,8 @@ snapshots:
   async-reactivity-vue@2.0.2: {}
 
   async-reactivity@2.0.13: {}
+
+  async-reactivity@2.0.14: {}
 
   balanced-match@1.0.2: {}
 

@@ -1,0 +1,16 @@
+{
+  "name": "@async-reactivity-sample/shared",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "types/index.js",
+  "scripts": {
+    "dev": "tsc -p src -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async-reactivity": "^2.0.14"
+  }
+}
