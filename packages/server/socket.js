@@ -1,20 +1,28 @@
 import { Watcher } from 'async-reactivity';
-import { b } from './state.js';
+import query from './query.js';
 
 export default (wss) => {
     wss.on('connection', (ws) => {
         let w;
+        let { invert, b } = query();
 
         ws.on('error', console.error);
 
-        ws.on('message', function message(data) {
-            const str = data.toString();
-            console.log(`socket | ${str}`);
-            if (str === 'start') {
+        ws.on('message', (data) => {
+            const message = JSON.parse(data.toString());
+            console.log(`socket | ${JSON.stringify(message)}`);
+            if (message.set) {
+                if (message.set === 'invert') {
+                    invert.value = message.value;
+                }
+            } else if (message.listen) {
                 w = new Watcher(b, (value) => {
-                    ws.send(value.toString());
+                    ws.send(JSON.stringify({
+                        set: "b",
+                        value
+                    }));
                 }, true);
-            } else if (str === 'stop') {
+            } else if (message.unlisten) {
                 w.dispose();
                 w = undefined;
             }

@@ -1,4 +1,5 @@
-import { a, b } from './state.js';
+import { a } from './state.js';
+import query from './query.js';
 
 const getBody = async (req) => {
     const parts = [];
@@ -35,8 +36,13 @@ export default (server) => {
             return;
         }
 
-        if (req.method === "GET") {
-            console.log('http | get');
+        const url = new URL(req.url, 'http://localhost:8080');
+
+        if (req.method === "GET" && url.pathname === '/') {
+            const i = url.searchParams.get('invert') === 'true'
+            console.log(`http | get (invert=${i})`);
+            const { invert, b } = query();
+            invert.value = i;
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({
                 b: b.value

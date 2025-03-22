@@ -1,7 +1,7 @@
 <template>
     <h2>Socket</h2>
     <button @click="show = !show">{{ show ? 'Collapse' : 'Expand' }}</button>
-    <p v-if="show">Listener: {{ b }}</p>
+    <p v-if="show">b: {{ b }}</p>
 </template>
 
 <script lang="ts" setup>

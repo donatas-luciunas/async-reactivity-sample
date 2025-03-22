@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import Http from './Http.vue';
 import Socket from './Socket.vue';
 
@@ -13,6 +13,12 @@ const send = async () => {
     })
   });
 };
+
+import * as query from './query.js';
+const invert = ref(false);
+watch(invert, (value) => {
+  query.invert.value = value;
+});
 </script>
 
 <template>
@@ -22,6 +28,11 @@ const send = async () => {
       <input type="number" v-model="input" />
       <button @click="send()">Send</button>
     </p>
+    <h2>Query</h2>
+    <label>
+      <input type="checkbox" v-model="invert" />
+      Invert
+    </label>
     <Http />
     <Socket />
   </div>
