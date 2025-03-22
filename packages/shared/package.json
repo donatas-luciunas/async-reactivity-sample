@@ -6,7 +6,8 @@
   "types": "types/index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsc -p src -w"
+    "dev": "tsc -p src -w",
+    "build": "tsc -p src"
   },
   "keywords": [],
   "author": "",

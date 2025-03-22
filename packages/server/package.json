@@ -7,7 +7,8 @@
   "type": "module",
   "scripts": {
     "start": "node lib/server.js",
-    "dev": "tsc -p src -w"
+    "dev": "tsc -p src -w",
+    "build": "tsc -p src"
   },
   "keywords": [],
   "author": "",

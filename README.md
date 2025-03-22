@@ -1,7 +1,10 @@
 Run server
 
 ```bash
-cd packages/server
+cd packages/shared
+pnpm run build
+cd ../server
+pnpm run build
 pnpm run start
 ```
 
