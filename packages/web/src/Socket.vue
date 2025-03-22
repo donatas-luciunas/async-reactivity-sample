@@ -8,7 +8,7 @@
 import { ref } from 'vue';
 const show = ref(false);
 
-import { bind } from 'async-reactivity-vue';
-import * as state from './socketState';
-const b = bind(state.b);
+import { bindAwait } from 'async-reactivity-vue';
+import { query } from './socketState';
+const b = bindAwait(query.b, true).data;
 </script>

@@ -1,55 +1,26 @@
-import { Listener, Ref, Watcher } from 'async-reactivity';
+import { Computed } from 'async-reactivity';
 import { invert } from './query.js';
-import { Connection, SampleLiveQuery, ConnectionListener } from '@async-reactivity-sample/shared';
+import { Connection, SampleLiveQuery as BaseSampleLiveQuery, AsyncListener } from '@async-reactivity-sample/shared';
 
 const socket = new WebSocket("ws://localhost:8080");
-const opened = new Promise(resolve => socket.addEventListener("open", resolve));
 
-const connection = new Connection(socket);
+export class SampleLiveQuery extends BaseSampleLiveQuery {
+    b: AsyncListener<boolean>;
+    invert: Computed<Promise<boolean>>;
 
-export class ClientSampleLiveQuery extends SampleLiveQuery {
-    b: ConnectionListener<Boolean>;
-    invert: Ref<Promise<Boolean>>;
+    constructor(connection: Connection, id?: string) {
+        super(connection, id);
 
-    constructor(connection: Connection) {
-        super();
-
-        this.b = new ConnectionListener<Boolean>(connection, 'b');
-        this.invert = new Ref(Promise.resolve(false));
+        this.b = new AsyncListener<boolean>(
+            () => this.connection.watch(this, 'b'),
+            () => this.connection.unwatch(this, 'b')
+        );
+        
+        this.invert = new Computed(value => Promise.resolve(value(invert)));
     }
 }
 
-const query = new ClientSampleLiveQuery(connection);
-connection.add(query);
-export default query;
+const connection = new Connection(socket, [SampleLiveQuery]);
 
-let listener, watcher;
-export const b = new Listener({
-    init: () => true,
-    start: async (setter) => {
-        await opened;
-        listener = (event: MessageEvent<any>) => {
-            const message = JSON.parse(event.data);
-            if (message?.set !== 'b') return;
-            console.log("socket | set", message.value);
-            setter(message.value);
-        };
-        watcher = new Watcher(invert, value => {
-            socket.send(JSON.stringify({
-                set: "invert",
-                value
-            }));
-        }, true);
-        socket.addEventListener("message", listener);
-        socket.send(JSON.stringify({
-            listen: "b"
-        }));
-    },
-    stop: () => {
-        socket.send(JSON.stringify({
-            unlisten: "b"
-        }));
-        socket.removeEventListener("message", listener!);
-        watcher!.dispose();
-    }
-});
+export const query = new SampleLiveQuery(connection);
+connection.add(query);

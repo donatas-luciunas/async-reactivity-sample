@@ -1,48 +1,118 @@
-import LiveQuery from "./LiveQuery";
+import { WebSocket, MessageEvent } from 'ws';
+import LiveQuery from "./LiveQuery.js";
+import { Dependency, Ref, Watcher } from 'async-reactivity';
+
+interface BaseMessage {
+    liveQuery: {
+        type: string;
+        id: string;
+    };
+    path: string;
+}
+
+interface SetMessage extends BaseMessage {
+    value: any;
+}
+
+interface Message {
+    set?: SetMessage;
+    watch?: BaseMessage;
+    unwatch?: BaseMessage;
+}
+
+const getLiveQueryKey = (type: string, id: string) => `${type}-${id}`;
+
+type LiveQueryConstructor = new (connection: Connection, id?: string) => LiveQuery;
 
 export default class Connection {
     private socket: WebSocket;
-    private queries: LiveQuery[] = [];
+    private liveQueries = new Map<string, LiveQuery>();
 
-    constructor(socket: WebSocket) {
+    private liveQueryTypes: Map<string, LiveQueryConstructor>;
+    private watchers = new Map<Dependency<any>, Watcher<any>>();
+
+    constructor(socket: WebSocket, liveQueryTypes: LiveQueryConstructor[]) {
         this.socket = socket;
-        socket.addEventListener('message', this.onMessage);
+        this.liveQueryTypes = new Map(liveQueryTypes.map(t => [t.name, t]));
+
+        socket.addEventListener('close', () => this[Symbol.dispose]());
+
+        socket.addEventListener('message', (event: MessageEvent) => {
+            const message: Message = JSON.parse(event.data.toString());
+            const liveQueryHead = (message.set ?? message.watch ?? message.unwatch)!.liveQuery;
+            const liveQuery = this.getCreateLiveQuery(liveQueryHead);
+            const path = (message.set ?? message.watch ?? message.unwatch)!.path;
+            // @ts-expect-error
+            const reference: Dependency<any> = liveQuery[path];  // todo better resolution
+            if (message.set) {
+                (reference as Ref<any>).value = Promise.resolve(message.set.value);
+            } else if (message.watch) {
+                if (!this.watchers.has(reference)) {
+                    this.watchers.set(reference, new Watcher(reference, async (value) => {
+                        this.socket.send(JSON.stringify({
+                            set: {
+                                liveQuery: {
+                                    type: liveQuery.constructor.name,
+                                    id: liveQuery.id,
+                                },
+                                path,
+                                value: await value
+                            }
+                        }));
+                    }));
+                } else {
+                    console.warn(`watcher already exist`, message);
+                }
+            } else if (message.unwatch) {
+                const w = this.watchers.get(reference);
+                w?.dispose();
+                this.watchers.delete(reference);
+            }
+        });
     }
 
-    private onMessage(event: MessageEvent) {
-        const message = JSON.parse(event.data.toString());
-        if (message.set) {
-            const query = this.queries[0];  // todo
-            const reference = query[message.set.path];  // todo
-            reference.value = message.set.value;
-        } else if (message.watch) {
-            // todo
-        } else if (message.unwatch) {
-            // todo
+    private getCreateLiveQuery(liveQueryHead: { type: string; id: string }) {
+        const key = getLiveQueryKey(liveQueryHead.type, liveQueryHead.id);
+        let liveQuery = this.liveQueries.get(key);
+        if (!liveQuery) {
+            const type = this.liveQueryTypes.get(liveQueryHead.type)!;
+            liveQuery = new type(this, liveQueryHead.id);
+            this.liveQueries.set(key, liveQuery);
         }
+        return liveQuery;
     }
 
-    add(query: LiveQuery) {
-        this.queries.push(query);
+    add(liveQuery: LiveQuery) {
+        this.liveQueries.set(getLiveQueryKey(liveQuery.constructor.name, liveQuery.id), liveQuery);
     }
 
-    watch(path: string) {
+    watch(liveQuery: LiveQuery, path: string) {
         this.socket.send(JSON.stringify({
             watch: {
+                liveQuery: {
+                    type: liveQuery.constructor.name,
+                    id: liveQuery.id
+                },
                 path
             }
         }));
     }
 
-    unwatch(path: string) {
+    unwatch(liveQuery: LiveQuery, path: string) {
         this.socket.send(JSON.stringify({
             unwatch: {
+                liveQuery: {
+                    type: liveQuery.constructor.name,
+                    id: liveQuery.id
+                },
                 path
             }
         }));
     }
 
     [Symbol.dispose]() {
-        this.socket.removeEventListener('message', this.onMessage);
+        for (const liveQuery of this.liveQueries.values()) {
+            liveQuery[Symbol.dispose]();
+        }
     }
 }

@@ -1,1 +1,0 @@
-{"version":3,"file":"ConnectionListener.d.ts","sourceRoot":"","sources":["../src/ConnectionListener.ts"],"names":[],"mappings":"AAAA,OAAO,aAAa,MAAM,iBAAiB,CAAC;AAC5C,OAAO,UAAU,MAAM,cAAc,CAAC;AAEtC,MAAM,CAAC,OAAO,OAAO,kBAAkB,CAAC,CAAC,CAAE,SAAQ,aAAa,CAAC,CAAC,CAAC;gBACnD,UAAU,EAAE,UAAU,EAAE,IAAI,EAAE,MAAM;CAWnD"}

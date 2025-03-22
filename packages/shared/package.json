@@ -4,6 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "types": "types/index.js",
+  "type": "module",
   "scripts": {
     "dev": "tsc -p src -w"
   },
@@ -11,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async-reactivity": "^2.0.14"
+    "@types/ws": "^8.18.0",
+    "async-reactivity": "^2.0.17",
+    "ws": "^8.18.0"
   }
 }

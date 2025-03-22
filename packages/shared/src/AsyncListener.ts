@@ -1,27 +1,26 @@
 import { Listener } from "async-reactivity";
 
 export default class AsyncListener<T> extends Listener<Promise<T>> {
-    private promiseActions?: { resolve: Function, reject: Function };
+    private promiseResolve?: (value: T) => void;
 
-    constructor({ start, stop }: { start: (setter: (value: T) => void) => void, stop: () => void }) {
-        super({
-            init: () => new Promise<T>((resolve, reject) => {
-                this.promiseActions = {
-                    resolve,
-                    reject
-                };
-            }),
-            start: (setter) => {
-                return start(value => {
-                    if (this.promiseActions) {
-                        this.promiseActions.resolve(value);
-                        this.promiseActions = undefined;
-                    } else {
-                        setter(Promise.resolve(value));
-                    }
-                });
-            },
-            stop
-        })
+    constructor(start: () => void, stop: () => void) {
+        let promiseResolve;
+        super(new Promise<T>(resolve => {
+            promiseResolve = resolve;
+        }), start, stop);
+        this.promiseResolve = promiseResolve;
+    }
+
+    public set value(_value: Promise<T>) {
+        if (this.promiseResolve) {
+            _value.then(this.promiseResolve);
+            this.promiseResolve = undefined;
+            this._value = _value;   // prevent invalidate
+        }
+        super.value = _value;
+    }
+
+    public get value(): Promise<T> {
+        return super.value!;
     }
 }

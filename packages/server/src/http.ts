@@ -1,8 +1,9 @@
+import { IncomingMessage, Server } from 'http';
 import { a } from './state.js';
 import query from './query.js';
 
-const getBody = async (req) => {
-    const parts = [];
+const getBody = async (req: IncomingMessage) => {
+    const parts: string[] = [];
 
     req.on('data', chunk => {
         parts.push(chunk);
@@ -13,7 +14,7 @@ const getBody = async (req) => {
     return JSON.parse(parts.join(''));
 };
 
-export default (server) => {
+export default (server: Server) => {
     server.on('request', async (req, res) => {
         // Set CORS headers
         res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
@@ -36,7 +37,7 @@ export default (server) => {
             return;
         }
 
-        const url = new URL(req.url, 'http://localhost:8080');
+        const url = new URL(req.url!, 'http://localhost:8080');
 
         if (req.method === "GET" && url.pathname === '/') {
             const i = url.searchParams.get('invert') === 'true'

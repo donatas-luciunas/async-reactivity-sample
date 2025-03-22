@@ -2,17 +2,21 @@
   "name": "@async-reactivity-sample/server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/server.js",
+  "types": "types/server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node lib/server.js",
+    "dev": "tsc -p src -w"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async-reactivity": "^2.0.14",
+    "@async-reactivity-sample/shared": "workspace:*",
+    "@types/node": "^22.13.11",
+    "@types/ws": "^8.18.0",
+    "async-reactivity": "^2.0.17",
     "ws": "^8.18.0"
   }
 }
