@@ -1,12 +1,12 @@
 import { WebSocketServer } from 'ws';
 import { createServer } from 'http';
 
-import httpApi from './http.js';
+import http from './http.js';
 const server = createServer();
-httpApi(server);
+http(server);
 
-import socketApi from './socket.js';
+import socket from './socket.js';
 const wss = new WebSocketServer({ server });
-socketApi(wss);
+socket(wss);
 
 server.listen(8080);
