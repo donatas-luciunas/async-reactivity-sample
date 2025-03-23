@@ -7,7 +7,7 @@ const socket = new WebSocket("ws://localhost:8080");
 
 export class SampleLiveQuery extends BaseSampleLiveQuery {
     public readonly invert: Computed<Promise<boolean>>;
-    public readonly b: ConnectionListener<boolean>;
+    public readonly b: ConnectionListener<boolean, SampleLiveQuery>;
 
     constructor(connection: Connection, id?: string) {
         super(connection, id);
@@ -15,7 +15,7 @@ export class SampleLiveQuery extends BaseSampleLiveQuery {
         // this.invert = invert; could be used, but type error occurs
         this.invert = this.register(new Computed(value => Promise.resolve(value(invert))));
 
-        this.b = new ConnectionListener<boolean>(this, 'b');
+        this.b = new ConnectionListener(this, async q => q.b);
     }
 }
 

@@ -5,13 +5,13 @@ import { SampleLiveQuery as BaseSampleLiveQuery } from '@async-reactivity-sample
 import { b } from './state.js';
 
 class SampleLiveQuery extends BaseSampleLiveQuery {
-    public readonly invert: ConnectionListener<boolean>;
+    public readonly invert: ConnectionListener<boolean, SampleLiveQuery>;
     public readonly b: Computed<Promise<boolean>>;
 
     constructor(connection: Connection, id?: string) {
         super(connection, id);
 
-        this.invert = new ConnectionListener<boolean>(this, 'invert');
+        this.invert = new ConnectionListener(this, async q => q.invert);
 
         this.b = this.register(new Computed(async value => {
             const i = await value(this.invert);
