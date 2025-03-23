@@ -9,65 +9,51 @@ importers:
   .:
     devDependencies:
       typescript:
-        specifier: ~5.7.2
+        specifier: ^5.7.3
         version: 5.7.3
-
-  packages/core:
-    dependencies:
-      '@types/ws':
-        specifier: ^8.18.0
-        version: 8.18.0
-      async-reactivity:
-        specifier: ^2.0.17
-        version: 2.0.17
-      uuid:
-        specifier: ^11.1.0
-        version: 11.1.0
-      ws:
-        specifier: ^8.18.0
-        version: 8.18.0
 
   packages/server:
     dependencies:
-      '@async-reactivity-sample/core':
-        specifier: workspace:*
-        version: link:../core
       '@async-reactivity-sample/shared':
         specifier: workspace:*
         version: link:../shared
+      async-reactivity:
+        specifier: ^2.0.18
+        version: 2.0.18
+      async-reactivity-net:
+        specifier: ^2.0.0
+        version: 2.0.0
+      ws:
+        specifier: ^8.18.0
+        version: 8.18.0
+    devDependencies:
       '@types/node':
         specifier: ^22.13.11
         version: 22.13.11
       '@types/ws':
         specifier: ^8.18.0
         version: 8.18.0
-      async-reactivity:
-        specifier: ^2.0.17
-        version: 2.0.17
-      ws:
-        specifier: ^8.18.0
-        version: 8.18.0
 
   packages/shared:
     dependencies:
-      '@async-reactivity-sample/core':
-        specifier: workspace:*
-        version: link:../core
       async-reactivity:
-        specifier: ^2.0.17
-        version: 2.0.17
+        specifier: ^2.0.18
+        version: 2.0.18
+      async-reactivity-net:
+        specifier: ^2.0.0
+        version: 2.0.0
 
   packages/web:
     dependencies:
-      '@async-reactivity-sample/core':
-        specifier: workspace:*
-        version: link:../core
       '@async-reactivity-sample/shared':
         specifier: workspace:*
         version: link:../shared
       async-reactivity:
-        specifier: ^2.0.17
-        version: 2.0.17
+        specifier: ^2.0.18
+        version: 2.0.18
+      async-reactivity-net:
+        specifier: ^2.0.0
+        version: 2.0.0
       async-reactivity-vue:
         specifier: ^2.0.3
         version: 2.0.3
@@ -82,7 +68,7 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
       typescript:
-        specifier: ~5.7.2
+        specifier: ^5.7.3
         version: 5.7.3
       vite:
         specifier: ^6.1.0
@@ -437,11 +423,14 @@ packages:
   alien-signals@0.4.14:
     resolution: {integrity: sha512-itUAVzhczTmP2U5yX67xVpsbbOiquusbWVyA9N+sy6+r6YVbFkahXvNCeEPWEOMhwDYwbVbGHFkVL03N9I5g+Q==}
 
+  async-reactivity-net@2.0.0:
+    resolution: {integrity: sha512-3vGsN/g7A6JEmF1ML/Wl3pf9EubbASxEFgldRnMPj43Qe2RN+HDA9aQjz9LX6a7kiJVtARD1v7IeeIVLxdxHXA==}
+
   async-reactivity-vue@2.0.3:
     resolution: {integrity: sha512-UrYz1HfCKf5JyUXH5PsZDjs0Y3BIl25HyDgF+QEQcsp8y86Nsmk5qZmTSewZ0oWOqoQWei+kRUL9VdEKMp2cUg==}
 
-  async-reactivity@2.0.17:
-    resolution: {integrity: sha512-A95FNE4ZeSbJSBk4cBqrTCuomarq9XDssTqdtMc9cY7qSeusSsGej7ZseZ0mUP5f4FDSFmXRjEfYp0qye/8Tsw==}
+  async-reactivity@2.0.18:
+    resolution: {integrity: sha512-SD5nEzuYzZzDb6ZQ0rWILjpkKgoSg/myEI2qMB3zOnDzNVjMMc1zyr/Bzds6Lelk94F4Kz9WjzN8sOhZ1CHK5w==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -846,9 +835,18 @@ snapshots:
 
   alien-signals@0.4.14: {}
 
+  async-reactivity-net@2.0.0:
+    dependencies:
+      async-reactivity: 2.0.18
+      uuid: 11.1.0
+      ws: 8.18.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
   async-reactivity-vue@2.0.3: {}
 
-  async-reactivity@2.0.17: {}
+  async-reactivity@2.0.18: {}
 
   balanced-match@1.0.2: {}
 

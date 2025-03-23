@@ -25,10 +25,6 @@ Socket mode is more complex, but it provides even more benefits:
 
 # Packages
 
-## Core
-
-This code should not be part of this repository and eventually will be moved out. This code will become part of async-reactivity libraries.
-
 ## Shared
 
 This code is shared among server and web.
@@ -57,16 +53,14 @@ There are three main parts:
     * `async-reactivity-vue` takes care of integration between `async-reactivity` and `@vue/reactivity`
     * HTTP mode has **Invalidate** button as it is unknown when server state changes
 * [http](packages/web/src/http.ts) implementation performs fetch request
-* [socket](packages/web/src/socket.ts) implementation creates live query and uses [Connection](packages/core/src/Connection.ts)
+* [socket](packages/web/src/socket.ts) implementation creates live query and uses `Connection`
 
 # Run
 
 Build
 
 ```bash
-cd packages/core
-pnpm run build
-cd ../shared
+cd packages/shared
 pnpm run build
 cd ../server
 pnpm run build

@@ -14,11 +14,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@async-reactivity-sample/core": "workspace:*",
     "@async-reactivity-sample/shared": "workspace:*",
-    "@types/node": "^22.13.11",
-    "@types/ws": "^8.18.0",
-    "async-reactivity": "^2.0.17",
+    "async-reactivity": "^2.0.18",
+    "async-reactivity-net": "^2.0.0",
     "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.11",
+    "@types/ws": "^8.18.0"
   }
 }

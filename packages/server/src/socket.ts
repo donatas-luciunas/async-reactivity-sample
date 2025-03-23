@@ -1,6 +1,6 @@
 import { WebSocketServer } from 'ws';
 import { Computed } from 'async-reactivity';
-import { Connection, ConnectionListener } from '@async-reactivity-sample/core';
+import { Connection, ConnectionListener } from 'async-reactivity-net';
 import { SampleLiveQuery as BaseSampleLiveQuery } from '@async-reactivity-sample/shared';
 import { b } from './state.js';
 

@@ -9,16 +9,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@async-reactivity-sample/core": "workspace:*",
     "@async-reactivity-sample/shared": "workspace:*",
-    "async-reactivity": "^2.0.17",
+    "async-reactivity": "^2.0.18",
+    "async-reactivity-net": "^2.0.0",
     "async-reactivity-vue": "^2.0.3",
     "vue": "^3.5.13"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
-    "typescript": "~5.7.2",
+    "typescript": "^5.7.3",
     "vite": "^6.1.0",
     "vue-tsc": "^2.2.0"
   }
