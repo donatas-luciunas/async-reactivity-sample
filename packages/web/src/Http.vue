@@ -10,7 +10,7 @@ import { ref } from 'vue';
 const show = ref(false);
 
 import { bindAwait } from 'async-reactivity-vue';
-import * as query from './http.js';
+import { query } from './http.js';
 const b = bindAwait(query.b, true).data;
 
 const invalidate = () => {

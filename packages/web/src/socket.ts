@@ -21,7 +21,5 @@ export class SampleLiveQuery extends BaseSampleLiveQuery {
 
 const connection = new Connection(socket, [SampleLiveQuery]);
 
-const query = new SampleLiveQuery(connection);
+export const query = new SampleLiveQuery(connection);
 connection.add(query);
-
-export const b = query.b;

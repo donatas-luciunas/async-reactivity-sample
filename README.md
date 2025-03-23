@@ -12,7 +12,7 @@ HTTP mode is easier to implement and it provides many benefits comparing to trad
     * Query refresh is replaced by query result invalidation, which is beneficial because cache invalidation does not always result in refreshing (for example when not actually used in the view)
 * Server
     * State is lazy loaded and cached
-* Types can be reused in browser and server
+* Shared types
 
 ## Socket
 

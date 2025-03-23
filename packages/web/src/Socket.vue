@@ -9,6 +9,6 @@ import { ref } from 'vue';
 const show = ref(false);
 
 import { bindAwait } from 'async-reactivity-vue';
-import * as query from './socket.js';
+import { query } from './socket.js';
 const b = bindAwait(query.b, true).data;
 </script>

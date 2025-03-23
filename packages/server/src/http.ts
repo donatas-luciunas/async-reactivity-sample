@@ -1,21 +1,24 @@
 import { Server } from 'http';
 import { Ref, Computed } from 'async-reactivity';
+import { SampleQuery as BaseSampleQuery } from '@async-reactivity-sample/shared';
 import { b } from './state.js';
 
-class SampleQuery {
-    public readonly invert: Ref<boolean>;
-    public readonly b: Computed<boolean>;
+class SampleQuery extends BaseSampleQuery {
+    public readonly invert: Ref<Promise<boolean>>;
+    public readonly b: Computed<Promise<boolean>>;
 
     constructor() {
-        this.invert = new Ref(false);
+        super();
 
-        this.b = new Computed(value => {
-            const i = value(this.invert);
+        this.invert = new Ref(Promise.resolve(false));
+
+        this.b = this.register(new Computed(async value => {
+            const i = await value(this.invert);
             if (i) {
                 return !value(b);
             }
             return value(b);
-        });
+        }));
     }
 }
 
@@ -27,9 +30,10 @@ export default (server: Server) => {
             const i = url.searchParams.get('invert') === 'true'
             console.log(`http | get (invert=${i})`);
             
-            const query = new SampleQuery();
-            query.invert.value = i;
-            const result = query.b.value;
+            const query = new SampleQuery(); // use using
+            query.invert.value = Promise.resolve(i);
+            const result = await query.b.value;
+            query[Symbol.dispose]();
 
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({
