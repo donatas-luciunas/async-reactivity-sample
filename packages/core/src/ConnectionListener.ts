@@ -34,13 +34,11 @@ const createProxy = (path: PropertyPathPart[] = []) => {
 
 export default class ConnectionListener<T1, T2 extends LiveQuery> extends AsyncListener<T1> {
     constructor(liveQuery: T2, func: (proxy: T2) => Promise<Dependency<Promise<T1>>>) {
-        let path: PropertyPathPart[];
-        (async () => await func(createProxy() as unknown as T2) as any)().then(output => {
-            path = output[proxyPath];
-        });
+        const pathPromise = func(createProxy() as unknown as T2)
+            .then(output => (output as any)[proxyPath]);
         super(
-            () => liveQuery.connection.watch(liveQuery, path),
-            () => liveQuery.connection.unwatch(liveQuery, path),
+            async () => liveQuery.connection.watch(liveQuery, await pathPromise),
+            async () => liveQuery.connection.unwatch(liveQuery, await pathPromise),
         );
     }
 }
