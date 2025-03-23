@@ -33,6 +33,8 @@ This code should not be part of this repository and eventually will be moved out
 
 This code is shared among server and web.
 
+Usage of `Promise` might look excessive, but it is unavoidable.
+
 ## Server
 
 There are three main parts:
