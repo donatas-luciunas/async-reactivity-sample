@@ -18,11 +18,8 @@ importers:
         specifier: ^2.0.18
         version: 2.0.18
       async-reactivity-net:
-        specifier: ^2.0.0
-        version: 2.0.0
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: ^2.0.1
+        version: 2.0.1
     devDependencies:
       '@types/lodash':
         specifier: ^4.17.16
@@ -50,8 +47,8 @@ importers:
         specifier: ^2.0.18
         version: 2.0.18
       async-reactivity-net:
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^2.0.1
+        version: 2.0.1
       ws:
         specifier: ^8.18.0
         version: 8.18.0
@@ -72,8 +69,8 @@ importers:
         specifier: ^2.0.18
         version: 2.0.18
       async-reactivity-net:
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^2.0.1
+        version: 2.0.1
       async-reactivity-vue:
         specifier: ^2.0.3
         version: 2.0.3
@@ -446,8 +443,8 @@ packages:
   alien-signals@0.4.14:
     resolution: {integrity: sha512-itUAVzhczTmP2U5yX67xVpsbbOiquusbWVyA9N+sy6+r6YVbFkahXvNCeEPWEOMhwDYwbVbGHFkVL03N9I5g+Q==}
 
-  async-reactivity-net@2.0.0:
-    resolution: {integrity: sha512-3vGsN/g7A6JEmF1ML/Wl3pf9EubbASxEFgldRnMPj43Qe2RN+HDA9aQjz9LX6a7kiJVtARD1v7IeeIVLxdxHXA==}
+  async-reactivity-net@2.0.1:
+    resolution: {integrity: sha512-uSTERAyg7dQCqVdD1iJ/QJu3Y09VXpE3NoffARB8uFNfB4A2xcM/8MhNJfnst2uaDfE0YMj2BVNn6s+PhXwe2A==}
 
   async-reactivity-vue@2.0.3:
     resolution: {integrity: sha512-UrYz1HfCKf5JyUXH5PsZDjs0Y3BIl25HyDgF+QEQcsp8y86Nsmk5qZmTSewZ0oWOqoQWei+kRUL9VdEKMp2cUg==}
@@ -487,9 +484,6 @@ packages:
   he@1.2.0:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
-
-  lodash@4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
@@ -863,7 +857,7 @@ snapshots:
 
   alien-signals@0.4.14: {}
 
-  async-reactivity-net@2.0.0:
+  async-reactivity-net@2.0.1:
     dependencies:
       async-reactivity: 2.0.18
       uuid: 11.1.0
@@ -922,8 +916,6 @@ snapshots:
     optional: true
 
   he@1.2.0: {}
-
-  lodash@4.17.21: {}
 
   magic-string@0.30.17:
     dependencies:

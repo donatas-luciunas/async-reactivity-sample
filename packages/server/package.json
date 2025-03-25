@@ -16,7 +16,7 @@
   "dependencies": {
     "@async-reactivity-sample/business-logic": "workspace:*",
     "async-reactivity": "^2.0.18",
-    "async-reactivity-net": "^2.0.0",
+    "async-reactivity-net": "^2.0.1",
     "ws": "^8.18.0"
   },
   "devDependencies": {

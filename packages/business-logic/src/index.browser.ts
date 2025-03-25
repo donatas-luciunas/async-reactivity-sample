@@ -1,2 +1,3 @@
-export { default as SampleQuery } from './SampleQuery.js';
-export { default as SampleLiveQuery } from './SampleLiveQuery.js';
+export { default as HttpSampleQuery } from './http/SampleQuery.browser.js';
+
+export { default as SocketSampleLiveQuery } from './socket/SampleLiveQuery.browser.js';
