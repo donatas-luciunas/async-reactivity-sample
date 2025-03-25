@@ -1,5 +1,5 @@
 import { Computed } from 'async-reactivity';
-import { SampleQuery as BaseSampleQuery } from '@async-reactivity-sample/shared';
+import { SampleQuery as BaseSampleQuery } from '@async-reactivity-sample/business-logic';
 import { invert } from './query.js';
 
 export class SampleQuery extends BaseSampleQuery {

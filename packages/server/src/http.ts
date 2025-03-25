@@ -1,6 +1,6 @@
 import { Server } from 'http';
 import { Ref, Computed } from 'async-reactivity';
-import { SampleQuery as BaseSampleQuery } from '@async-reactivity-sample/shared';
+import { SampleQuery as BaseSampleQuery } from '@async-reactivity-sample/business-logic';
 import { b } from './state.js';
 
 class SampleQuery extends BaseSampleQuery {

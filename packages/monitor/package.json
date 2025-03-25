@@ -1,12 +1,12 @@
 {
-  "name": "@async-reactivity-sample/server",
+  "name": "@async-reactivity-sample/monitor",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/server.js",
-  "types": "types/server.js",
+  "main": "lib/monitor.js",
+  "types": "types/monitor.js",
   "type": "module",
   "scripts": {
-    "start": "node lib/server.js",
+    "start": "node lib/monitor.js",
     "dev": "tsc -p src -w",
     "build": "tsc -p src"
   },
@@ -15,12 +15,9 @@
   "license": "ISC",
   "dependencies": {
     "@async-reactivity-sample/business-logic": "workspace:*",
-    "async-reactivity": "^2.0.18",
-    "async-reactivity-net": "^2.0.0",
-    "ws": "^8.18.0"
+    "async-reactivity": "^2.0.18"
   },
   "devDependencies": {
-    "@types/node": "^22.13.11",
-    "@types/ws": "^8.18.0"
+    "@types/node": "^22.13.11"
   }
 }

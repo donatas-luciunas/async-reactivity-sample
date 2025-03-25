@@ -1,6 +1,6 @@
 import { Computed } from 'async-reactivity';
 import { Connection, ConnectionListener } from 'async-reactivity-net';
-import { SampleLiveQuery as BaseSampleLiveQuery } from '@async-reactivity-sample/shared';
+import { SampleLiveQuery as BaseSampleLiveQuery } from '@async-reactivity-sample/business-logic';
 import { invert } from './query.js';
 
 const socket = new WebSocket("ws://localhost:8080");

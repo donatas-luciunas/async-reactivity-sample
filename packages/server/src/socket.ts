@@ -1,7 +1,7 @@
 import { WebSocketServer } from 'ws';
 import { Computed } from 'async-reactivity';
 import { Connection, ConnectionListener } from 'async-reactivity-net';
-import { SampleLiveQuery as BaseSampleLiveQuery } from '@async-reactivity-sample/shared';
+import { SampleLiveQuery as BaseSampleLiveQuery } from '@async-reactivity-sample/business-logic';
 import { b } from './state.js';
 
 class SampleLiveQuery extends BaseSampleLiveQuery {
