@@ -29,5 +29,6 @@ export default class Item extends BaseItem {
 
     [Symbol.dispose]() {
         unsubscribe(this.invalidate);
+        super[Symbol.dispose]();
     }
 }

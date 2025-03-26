@@ -107,6 +107,10 @@ There are no incoming messages about irrelevant changes:
 * items are filtered out
 * same value written
 
+## Disadvantages
+
+Easy to create memory leaks. *Don't forget to use `timeToLive` on `Computed`.*
+
 # Run
 
 Build

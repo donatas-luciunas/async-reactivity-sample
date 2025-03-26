@@ -20,7 +20,6 @@
         <button style="margin-left: 10px;" @click="invalidate()">Invalidate</button>
     </div>
     <div v-if="show">
-        <p>{{ counts.done }} done, {{ counts.notDone }} pending</p>
         <Item v-for="item of items" :key="item.id" :item="item" />
     </div>
 </template>
@@ -75,7 +74,7 @@ class SampleQuery {
             const response = await fetch(url);
             const result = await response.json();
             return result;
-        });
+        }, undefined, 3 * 1000);
 
         this.items = new Computed(async (value, previousValue) => {
             const previousItems = new Map(((await previousValue) ?? []).map(i => [i.id, i]));
@@ -91,26 +90,7 @@ class SampleQuery {
 
                 return new ItemEntity(i);
             });
-        });
-
-        this.counts = new Computed(async (value) => {
-            const items = await value(this.items);
-
-            const result = {
-                done: 0,
-                notDone: 0
-            };
-
-            for (const i of items) {
-                if (value(i.done)) {
-                    result.done++;
-                } else {
-                    result.notDone++;
-                }
-            }
-
-            return result;
-        });
+        }, undefined, 3 * 1000);
     }
 }
 
@@ -118,7 +98,6 @@ const query = new SampleQuery();
 
 import { bindAwait } from 'async-reactivity-vue';
 const items = bindAwait(query.items, []).data;
-const counts = bindAwait(query.counts, { done: 0, notDone: 0 }).data;
 
 const invalidate = () => {
     query.dataItems.forceInvalidate();

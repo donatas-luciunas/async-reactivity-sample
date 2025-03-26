@@ -14,4 +14,6 @@ export default abstract class Item {
             return !!text;
         }, undefined, 3 * 1000);
     }
+
+    [Symbol.dispose]() { }
 }

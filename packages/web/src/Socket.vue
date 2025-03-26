@@ -19,7 +19,6 @@
         <button @click="show = !show">{{ show ? 'Collapse' : 'Expand' }}</button>
     </div>
     <div v-if="show">
-        <p>{{ counts.done }} done, {{ counts.notDone }} pending</p>
         <Item v-for="item of items" :key="item.id" :item="item" />
     </div>
 </template>
@@ -57,7 +56,6 @@ const query = (() => {
 
 import { bindAwait } from 'async-reactivity-vue';
 const items = bindAwait(query.items, []).data;
-const counts = bindAwait(query.counts, { done: 0, notDone: 0 }).data;
 
 import Item from './Item.vue';
 </script>

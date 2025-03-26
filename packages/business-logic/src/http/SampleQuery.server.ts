@@ -13,7 +13,7 @@ export default class SampleQuery extends BaseSampleQuery {
 
         this.token = new Ref(undefined);
 
-        this.dataItems = this.register(new Computed(async value => {
+        this.dataItems = new Computed(async value => {
             if (!value(this.token)) {
                 throw new Error('Unauthorized');
             }
@@ -34,7 +34,7 @@ export default class SampleQuery extends BaseSampleQuery {
             }
 
             return result;
-        }));
+        }, undefined, 3 * 1000);
 
         this.dataItemsInvalidate = () => this.dataItems.forceInvalidate();
         subscribe(this.dataItemsInvalidate);

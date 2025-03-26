@@ -14,12 +14,12 @@ export default class SampleQuery extends BaseSampleQuery implements FetchQuery {
 
         this.token = new Ref('client-token');
 
-        this.dataItems = this.register(new FetchComputed(this, async (value, q) => {
+        this.dataItems = new FetchComputed(this, async (value, q) => {
             q.token.value = value(this.token);
             q.filters.done.value = value(this.filters.done);
             q.filters.text.value = value(this.filters.text);
             return q.dataItems;
-        }));
+        });
     }
 
     async fetch<T>(body: FetchBody) {

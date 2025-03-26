@@ -16,28 +16,28 @@ const props = defineProps<{
     item: Item
 }>();
 
-import { ref, onBeforeUnmount } from 'vue';
+import { bindAwait } from 'async-reactivity-vue';
+const item = {
+    text: bindAwait(props.item.text, '').data,
+    done: bindAwait(props.item.done, false).data,
+    valid: bindAwait(props.item.valid, true).data,
+};
+
+import { ref, watch } from 'vue';
 const text = ref('');
 const done = ref(false);
 const valid = ref(true);
 
-import { Watcher } from 'async-reactivity';
-const watchers = [
-    new Watcher(props.item.text, async (value) => {
-        text.value = await value;
-    }),
-    new Watcher(props.item.done, async (value) => {
-        done.value = await value;
-    }),
-    new Watcher(props.item.valid, async (value) => {
-        valid.value = await value;
-    })
-];
+watch(item.text, (value) => {
+    text.value = value;
+});
 
-onBeforeUnmount(() => {
-    for (const w of watchers) {
-        w.dispose();
-    }
+watch(item.done, (value) => {
+    done.value = value;
+});
+
+watch(item.valid, (value) => {
+    valid.value = value;
 });
 
 const updateText = async () =>
