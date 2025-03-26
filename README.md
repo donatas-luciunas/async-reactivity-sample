@@ -17,6 +17,7 @@ HTTP Query needs to be used in browser and server and it provides even more bene
 * Browser and server shared types and logic
 * Query usage in server
 * Query takes care of communication between browser and server (API)
+* Easier to test
 
 ## Socket
 
