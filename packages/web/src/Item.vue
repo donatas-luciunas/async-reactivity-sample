@@ -16,25 +16,32 @@ const props = defineProps<{
     item: Item
 }>();
 
-import { ref } from 'vue';
-import { Watcher } from 'async-reactivity';
+import { ref, onBeforeUnmount } from 'vue';
 const text = ref('');
-new Watcher(props.item.text, (value) => {
-    text.value = value;
-});
-
 const done = ref(false);
-new Watcher(props.item.done, (value) => {
-    done.value = value;
-});
-
 const valid = ref(true);
-new Watcher(props.item.valid, (value) => {
-    valid.value = value;
+
+import { Watcher } from 'async-reactivity';
+const watchers = [
+    new Watcher(props.item.text, async (value) => {
+        text.value = await value;
+    }),
+    new Watcher(props.item.done, async (value) => {
+        done.value = await value;
+    }),
+    new Watcher(props.item.valid, async (value) => {
+        valid.value = await value;
+    })
+];
+
+onBeforeUnmount(() => {
+    for (const w of watchers) {
+        w.dispose();
+    }
 });
 
 const updateText = async () =>
-    fetch(`http://localhost:8080/items/${props.item.id}`, {
+    fetch(`http://localhost:8080/items/${props.item.id}?token=client-token`, {
         method: 'PATCH',
         body: JSON.stringify({
             text: text.value
@@ -42,7 +49,7 @@ const updateText = async () =>
     });
 
 const updateDone = async () =>
-    fetch(`http://localhost:8080/items/${props.item.id}`, {
+    fetch(`http://localhost:8080/items/${props.item.id}?token=client-token`, {
         method: 'PATCH',
         body: JSON.stringify({
             done: done.value
@@ -50,7 +57,7 @@ const updateDone = async () =>
     });
 
 const remove = async () =>
-    fetch(`http://localhost:8080/items/${props.item.id}`, {
+    fetch(`http://localhost:8080/items/${props.item.id}?token=client-token`, {
         method: 'DELETE'
     });
 </script>

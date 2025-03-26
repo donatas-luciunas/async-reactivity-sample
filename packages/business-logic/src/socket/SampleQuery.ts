@@ -1,7 +1,6 @@
 import { Computed, Dependency } from "async-reactivity";
 import { Query } from "async-reactivity-net";
-import { DataItem } from "../data.js";
-import Item from "../Item.js";
+import Item from "./Item.js";
 
 export default abstract class SampleQuery extends Query {
     abstract readonly token: Dependency<Promise<string>>;
@@ -11,32 +10,31 @@ export default abstract class SampleQuery extends Query {
         text: Dependency<Promise<string | null>>;
     };
 
-    abstract readonly dataItems: Dependency<Promise<DataItem[]>>;
+    abstract readonly dataItems: Dependency<Promise<string[]>>;
+
+    readonly item: (id: string) => Item;
 
     readonly items: Computed<Promise<Item[]>>;
 
     readonly counts: Computed<Promise<{ done: number; notDone: number }>>;
 
-    constructor() {
+    constructor(createItem: (id: string) => Item) {
         super();
 
-        this.items = this.register(new Computed(async (value, previousValue) => {
-            const previousItems = new Map(((await previousValue) ?? []).map(i => [i.id, i]));
-
-            const dataItems = await value(this.dataItems);
-
-            return dataItems.map(i => {
-                const item = previousItems.get(i.id);
-
-                if (item) {
-                    item.text.value = i.text;
-                    item.done.value = i.done;
-                    return item;
+        {
+            const items = new Map<string, Item>();
+            this.item = (id: string) => {
+                if (!items.has(id)) {
+                    items.set(id, createItem(id));
                 }
+                return items.get(id)!;
+            };
+        }
 
-                return new Item(i);
-            });
-        }, undefined, 5 * 1000));
+        this.items = this.register(new Computed(async (value) => {
+            const dataItems = await value(this.dataItems);
+            return dataItems.map(id => this.item(id));
+        }, undefined, 3 * 1000));
 
         this.counts = this.register(new Computed(async (value) => {
             const items = await value(this.items);
@@ -47,7 +45,7 @@ export default abstract class SampleQuery extends Query {
             };
 
             for (const i of items) {
-                if (value(i.done)) {
+                if (await value(i.done)) {
                     result.done++;
                 } else {
                     result.notDone++;
@@ -55,6 +53,6 @@ export default abstract class SampleQuery extends Query {
             }
 
             return result;
-        }, undefined, 5 * 1000));
+        }, undefined, 3 * 1000));
     }
 }

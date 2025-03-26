@@ -1,12 +1,12 @@
 import { Connection, ConnectionListener, LiveQuery, newId } from "async-reactivity-net";
 import { Ref } from "async-reactivity";
 import BaseSampleQuery from './SampleQuery.js';
-import { DataItem } from "../data.js";
+import Item from './Item.browser.js';
 
 export default class SampleLiveQuery extends BaseSampleQuery implements LiveQuery {
     readonly token: Ref<Promise<string>>;
 
-    readonly dataItems: ConnectionListener<DataItem[], SampleLiveQuery>;
+    readonly dataItems: ConnectionListener<string[], SampleLiveQuery>;
     
     readonly filters: {
         done: Ref<Promise<boolean | null>>;
@@ -14,7 +14,7 @@ export default class SampleLiveQuery extends BaseSampleQuery implements LiveQuer
     };
 
     constructor(readonly connection: Connection, readonly id: string = newId()) {
-        super();
+        super(id => new Item(this, id));
 
         this.token = new Ref(Promise.resolve('client-token'));
 

@@ -1,5 +1,5 @@
 import { Computed, Ref } from "async-reactivity";
-import { DataItem } from "./data.js";
+import { DataItem } from "../data.js";
 
 export default class Item {
     readonly id: string;

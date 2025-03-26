@@ -18,7 +18,7 @@ export default (server: Server) => {
                 text: url.searchParams.get('text')
             };
 
-            const items = await Data.get();
+            const items = await Data.list();
             const result = items.filter(i =>
                 (filters.done === null || i.done === filters.done)
                 && (!filters.text || i.text.includes(filters.text))
@@ -29,11 +29,16 @@ export default (server: Server) => {
         }
 
         if (req.method === 'PATCH' && url.pathname.startsWith('/items/')) {
+            if (!url.searchParams.get('token')) {
+                res.writeHead(401);
+                res.end();
+                return;
+            }
+
             const id = url.pathname.replace('/items/', '');
             const body = await getBody(req);
 
-            const items = await Data.get();
-            const item = items.find(i => i.id === id);
+            const item = await Data.get(id);
             if (!item) {
                 res.writeHead(404);
                 res.end();
@@ -52,17 +57,16 @@ export default (server: Server) => {
         }
 
         if (req.method === 'DELETE' && url.pathname.startsWith('/items')) {
-            const id = url.pathname.replace('/items/', '');
-            
-            const items = await Data.get();
-            const index = items.findIndex(i => i.id === id);
-            if (index === -1) {
-                res.writeHead(404);
+            if (!url.searchParams.get('token')) {
+                res.writeHead(401);
                 res.end();
                 return;
             }
-            items.splice(index, 1);
-
+            
+            const id = url.pathname.replace('/items/', '');
+            
+            await Data.remove(id);
+            
             Data.write();
 
             res.writeHead(204);

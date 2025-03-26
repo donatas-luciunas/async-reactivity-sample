@@ -24,7 +24,7 @@ HTTP Query needs to be used in browser and server and it provides even more bene
 Socket mode gives everything mentioned earlier + these superpowers:
 
 * Fully declarative
-    * Browser gets real-time updates
+    * Browser gets granular real-time updates
     * No need to care about refresh
 * Query can be adjusted, minimal amount of recalculations is ensured
 
@@ -78,9 +78,32 @@ Shared code among server and web.
 * [Http.vue](packages/web/src/Http.vue) illustrates HTTP Query mode
 * [Socket.vue](packages/web/src/Socket.vue) illustrates Socket mode
 
-HTTP modes have **Invalidate** button as it is unknown when server state changes.
-
 `async-reactivity-vue` takes care of integration between `async-reactivity` and `@vue/reactivity`
+
+# Highlights
+
+Communication with server is only made when query results are actually used in the template (Expand / Collapse button).
+
+When used in the template, filters have instant effect. Text filter is trimmed, so whitespaces have no effect.
+
+HTTP modes have **Invalidate** button as it is unknown when server state changes (could be changed from another tab). For easier inspection writes do not trigger invalidate. That's why validation messages stay visible until refreshed.
+
+Monitor warning condition can be met after various events:
+
+* text changed
+* status changed
+* item removed
+
+That's why it is reasonable to monitor query, not specific event.
+
+## Socket mode
+
+`Computed`s keep `Listener`s alive for 3s after last usage (Collapse).
+
+There are no incoming messages about irrelevant changes:
+
+* items are filtered out
+* same value written
 
 # Run
 

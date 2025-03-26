@@ -31,7 +31,7 @@ import { debounce } from 'lodash-es';
 
 const text = ref('');
 watch(text, debounce(() => {
-    query.filters.text.value = text.value;
+    query.filters.text.value = text.value.trim();
 }, 500));
 
 const doneFilter = ref(false);

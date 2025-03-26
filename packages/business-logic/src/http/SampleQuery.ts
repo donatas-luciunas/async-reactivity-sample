@@ -1,7 +1,7 @@
 import { Computed, Dependency, Ref } from "async-reactivity";
 import { Query } from "async-reactivity-net";
 import { DataItem } from "../data.js";
-import Item from "../Item.js";
+import Item from "./Item.js";
 
 export default abstract class SampleQuery extends Query {
     abstract readonly token: Dependency<string | undefined>;

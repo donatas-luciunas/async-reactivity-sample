@@ -1,6 +1,7 @@
 import { Computed, Ref } from "async-reactivity";
 import BaseSampleQuery from './SampleQuery.js';
-import { DataItem, get, subscribe, unsubscribe } from "../data.js";
+import Item from './Item.server.js';
+import { list, subscribe, unsubscribe } from "../data.js";
 
 export default class SampleQuery extends BaseSampleQuery {
     readonly token: Ref<Promise<string>>;
@@ -10,11 +11,11 @@ export default class SampleQuery extends BaseSampleQuery {
         text: Ref<Promise<string | null>>;
     };
 
-    readonly dataItems: Computed<Promise<DataItem[]>>;
+    readonly dataItems: Computed<Promise<string[]>>;
     readonly dataItemsInvalidate: Function;
 
     constructor() {
-        super();
+        super(id => new Item(id));
 
         this.token = new Ref(Promise.resolve('server-token'));
 
@@ -33,7 +34,7 @@ export default class SampleQuery extends BaseSampleQuery {
                 text: await value(this.filters.text)
             };
 
-            let result = await get();
+            let result = await list();
 
             if (filters.done !== null) {
                 result = result.filter(i => i.done === filters.done);
@@ -43,8 +44,8 @@ export default class SampleQuery extends BaseSampleQuery {
                 result = result.filter(i => i.text.includes(filters.text!));
             }
 
-            return result;
-        }, undefined, 5 * 1000));
+            return result.map(i => i.id);
+        }, undefined, 3 * 1000));
         
         this.dataItemsInvalidate = () => this.dataItems.forceInvalidate();
         subscribe(this.dataItemsInvalidate);

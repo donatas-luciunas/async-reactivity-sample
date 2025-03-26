@@ -1,6 +1,6 @@
 import { Computed, Ref } from "async-reactivity";
 import BaseSampleQuery from './SampleQuery.js';
-import { DataItem, get, subscribe, unsubscribe } from "../data.js";
+import { DataItem, list, subscribe, unsubscribe } from "../data.js";
 
 export default class SampleQuery extends BaseSampleQuery {
     readonly token: Ref<string | undefined>;
@@ -23,7 +23,7 @@ export default class SampleQuery extends BaseSampleQuery {
                 text: value(this.filters.text)
             };
 
-            let result = await get();
+            let result = await list();
 
             if (filters.done !== null) {
                 result = result.filter(i => i.done === filters.done);

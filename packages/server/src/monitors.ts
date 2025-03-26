@@ -24,7 +24,8 @@ import { HttpSampleQuery, SocketSampleQuery } from "@async-reactivity-sample/bus
 
     new Watcher(query.items, async (itemsPromise) => {
         const items = await itemsPromise;
-        const result = items.every(i => i.valid.value);
+        const validity = await Promise.all(items.map(i => i.valid.value));
+        const result = validity.every(v => v);
         if (!result) {
             console.warn('Invalid undone items exist');
         } else {

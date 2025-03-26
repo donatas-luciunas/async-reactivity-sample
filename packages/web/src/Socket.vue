@@ -30,7 +30,7 @@ import { debounce } from 'lodash-es';
 
 const text = ref('');
 watch(text, debounce(() => {
-    query.filters.text.value = Promise.resolve(text.value);
+    query.filters.text.value = Promise.resolve(text.value.trim());
 }, 500));
 
 const doneFilter = ref(false);
