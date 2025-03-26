@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue';
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 
 const text = ref('');
 watch(text, debounce(() => {

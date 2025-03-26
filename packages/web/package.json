@@ -11,14 +11,14 @@
   "dependencies": {
     "@async-reactivity-sample/business-logic": "workspace:*",
     "async-reactivity": "^2.0.20",
-    "async-reactivity-net": "^2.0.3",
+    "async-reactivity-net": "^2.0.4",
     "async-reactivity-vue": "^2.0.3",
-    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.16",
+    "@types/lodash-es": "^4.17.12",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
     "typescript": "^5.7.3",
