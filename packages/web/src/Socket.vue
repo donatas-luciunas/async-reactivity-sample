@@ -41,7 +41,18 @@ watch([doneFilter, doneValue], ([filter, value]) => {
 
 const show = ref(false);
 
-import { query } from './socket.js';
+import { Connection } from 'async-reactivity-net';
+import { SocketSampleLiveQuery } from '@async-reactivity-sample/business-logic';
+
+const query = (() => {
+    const socket = new WebSocket("ws://localhost:8080");
+    const connection = new Connection(socket, [SocketSampleLiveQuery]);
+
+    const query = new SocketSampleLiveQuery(connection);
+    connection.add(query);
+    
+    return query;
+})();
 
 import { bindAwait } from 'async-reactivity-vue';
 const items = bindAwait(query.items, []).data;

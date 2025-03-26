@@ -1,6 +1,6 @@
 import { Computed, Ref } from "async-reactivity";
 import BaseSampleQuery from './SampleQuery.js';
-import { DataItem, items } from "../data.js";
+import { DataItem, get, subscribe, unsubscribe } from "../data.js";
 
 export default class SampleQuery extends BaseSampleQuery {
     readonly token: Ref<Promise<string>>;
@@ -11,6 +11,7 @@ export default class SampleQuery extends BaseSampleQuery {
     };
 
     readonly dataItems: Computed<Promise<DataItem[]>>;
+    readonly dataItemsInvalidate: Function;
 
     constructor() {
         super();
@@ -32,7 +33,7 @@ export default class SampleQuery extends BaseSampleQuery {
                 text: await value(this.filters.text)
             };
 
-            let result = items;
+            let result = await get();
 
             if (filters.done !== null) {
                 result = result.filter(i => i.done === filters.done);
@@ -44,6 +45,14 @@ export default class SampleQuery extends BaseSampleQuery {
 
             return result;
         }, undefined, 5 * 1000));
+        
+        this.dataItemsInvalidate = () => this.dataItems.forceInvalidate();
+        subscribe(this.dataItemsInvalidate);
+    }
+
+    [Symbol.dispose]() {
+        super[Symbol.dispose]();
+        unsubscribe(this.dataItemsInvalidate);
     }
 
 }

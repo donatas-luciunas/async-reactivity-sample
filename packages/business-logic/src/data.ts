@@ -4,7 +4,7 @@ export interface DataItem {
     done: boolean;
 }
 
-export const items: DataItem[] = [{
+const items: DataItem[] = [{
     id: 'a6202f5f-a465-45bc-b7b0-672db7a78cd6',
     text: 'Task 1',
     done: true
@@ -21,3 +21,21 @@ export const items: DataItem[] = [{
     text: '',
     done: false
 }];
+
+export const get = async () => items;
+
+const subscribers = new Set<Function>();
+
+export const writeItems = async () => {
+    for (const s of subscribers) {
+        s();
+    }
+};
+
+export const subscribe = (subscriber: Function) => {
+    subscribers.add(subscriber);
+};
+
+export const unsubscribe = (subscriber: Function) => {
+    subscribers.delete(subscriber);
+};

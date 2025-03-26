@@ -42,8 +42,46 @@ watch([doneFilter, doneValue], ([filter, value]) => {
 
 const show = ref(false);
 
-import { HttpSampleQuery } from '@async-reactivity-sample/business-logic';
-const query = new HttpSampleQuery();
+import { Ref, Computed } from 'async-reactivity';
+import { DataItem, Item as ItemEntity } from '@async-reactivity-sample/business-logic';
+class SampleQuery {
+    readonly filters: {
+        done: Ref<boolean | null>;
+        text: Ref<string | null>;
+    };
+
+    readonly dataItems: Computed<Promise<DataItem[]>>;
+
+    readonly items: Computed<Promise<ItemEntity[]>>;
+
+    constructor() {
+        this.filters = {
+            done: new Ref(null),
+            text: new Ref(null)
+        };
+
+        this.dataItems = new Computed(async value => {
+            const url = new URL('http://localhost:8080/items');
+            url.searchParams.set('token', 'client-token');
+            if (value(this.filters.done) !== null) {
+                url.searchParams.set('done', value(this.filters.done)!.toString());
+            }
+            if (value(this.filters.text) !== null) {
+                url.searchParams.set('text', value(this.filters.text)!);
+            }
+            const response = await fetch(url);
+            const result = await response.json();
+            return result;
+        });
+
+        this.items = new Computed(async value => {
+            const dataItems = await value(this.dataItems);
+            return dataItems.map(i => new ItemEntity(i));
+        });
+    }
+}
+
+const query = new SampleQuery();
 
 import { bindAwait } from 'async-reactivity-vue';
 const items = bindAwait(query.items, []).data;

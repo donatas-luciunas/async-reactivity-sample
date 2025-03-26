@@ -8,8 +8,6 @@ export default (server: Server) => {
 
     server.on('request', async (req, res) => {
         if (req.method === "POST" && req.url === '/query') {
-            console.log(`http | get`);
-
             const body = await getBody(req);
             const result = await responder.run(body);
             

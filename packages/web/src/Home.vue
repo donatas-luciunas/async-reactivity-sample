@@ -1,6 +1,9 @@
 <template>
     <ul>
         <li>
+            <router-link to="/http-rest">HTTP REST</router-link>
+        </li>
+        <li>
             <router-link to="/http">HTTP mode</router-link>
         </li>
         <li>
