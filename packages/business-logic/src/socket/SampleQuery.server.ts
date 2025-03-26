@@ -40,7 +40,7 @@ export default class SampleQuery extends BaseSampleQuery {
                 result = result.filter(i => i.done === filters.done);
             }
 
-            if (filters.text !== null) {
+            if (filters.text) {
                 result = result.filter(i => i.text.includes(filters.text!));
             }
 

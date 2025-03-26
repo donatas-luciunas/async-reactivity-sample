@@ -69,7 +69,7 @@ class SampleQuery {
             if (value(this.filters.done) !== null) {
                 url.searchParams.set('done', value(this.filters.done)!.toString());
             }
-            if (value(this.filters.text) !== null) {
+            if (value(this.filters.text)) {
                 url.searchParams.set('text', value(this.filters.text)!);
             }
             const response = await fetch(url);
