@@ -1,9 +1,8 @@
 import { Connection, ConnectionListener, LiveQuery, newId } from "async-reactivity-net";
 import BaseSampleServerQuery from './SampleQuery.server.js';
-import { Ref } from "async-reactivity";
 
 export default class SampleLiveQuery extends BaseSampleServerQuery implements LiveQuery {
-    readonly token: Ref<Promise<string>>;
+    readonly token: ConnectionListener<string, SampleLiveQuery>;
     
     readonly filters: {
         done: ConnectionListener<boolean | null, SampleLiveQuery>;
