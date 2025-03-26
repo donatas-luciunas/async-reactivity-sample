@@ -2,65 +2,91 @@ This repository helps familiarize with async-reactivity approach to browser and 
 
 # Modes
 
-## HTTP
+## HTTP REST
 
-HTTP mode is easier to implement and it provides many benefits comparing to traditional approach:
+HTTP REST mode affects only browser and it provides many benefits comparing to traditional approach:
 
-* Browser
-    * Query is lazy loaded (loaded only when actually used in the view)
-    * Query result is cached and could be reused in multiple components
-    * Query refresh is replaced by query result invalidation, which is beneficial because cache invalidation does not always result in refreshing (for example when not actually used in the view)
-* Server
-    * State is lazy loaded and cached
-* Shared types
+* Query is lazy loaded (loaded only when actually used in the view)
+* Query result is cached and could be reused in multiple components
+* Query refresh is replaced by query result invalidation, which is beneficial because cache invalidation does not always result in refreshing (for example when not actually used in the view)
+
+## HTTP Query
+
+HTTP Query needs to be used in browser and server and it provides even more benefits:
+
+* Browser and server shared types and logic
+* Query usage in server
+* Query takes care of communication between browser and server (API)
 
 ## Socket
 
-Socket mode is more complex, but it provides even more benefits:
+Socket mode gives everything mentioned earlier + these superpowers:
 
 * Fully declarative
     * Browser gets real-time updates
     * No need to care about refresh
 * Query can be adjusted, minimal amount of recalculations is ensured
 
+# Sample
+
+This app provides simple todo list to illustrate async-reactivity capabilities.
+
+User can:
+
+* view todo items
+  * filter by text
+  * filter by status
+* edit todo items
+  * change text
+  * change status (done / not done)
+  * remove
+* get notification if not valid not done items exist
+
+There is no data persistence, memory is used.
+
+Code is not shared between modes.
+
 # Packages
 
-## Shared
+## Business Logic
 
-This code is shared among server and web.
+Shared code among server and web.
 
-Usage of `Promise` might look excessive, but it is unavoidable.
+* [data.ts](packages/business-logic/src/data.ts) (server-only) is a in-memory database. It provides `get`, `write`, `subscribe`, `unsubscribe` methods.
+* [Item.ts](packages/business-logic/src/Item.ts) is todo item entity class
+* [http](packages/business-logic/src/http) illustrates HTTP Query mode
+  * [SampleQuery.ts](packages/business-logic/src/http/SampleQuery.ts) - shared code
+  * [SampleQuery.browser.ts](packages/business-logic/src/http/SampleQuery.browser.ts) - browser version
+  * [SampleQuery.server.ts](packages/business-logic/src/http/SampleQuery.server.ts) - server version
+* [socket](packages/business-logic/src/socket) illustrates Socket mode
+  * [SampleQuery.ts](packages/business-logic/src/socket/SampleQuery.ts) - shared code
+  * [SampleLiveQuery.browser.ts](packages/business-logic/src/socket/SampleLiveQuery.browser.ts) - browser version
+  * [SampleLiveQuery.server.ts](packages/business-logic/src/socket/SampleLiveQuery.server.ts) - server version for communication with browser
+  * [SampleQuery.server.ts](packages/business-logic/src/socket/SampleQuery.server.ts) - server version for internal use
 
 ## Server
 
-There are three main parts:
-
-* [state](packages/server/src/state.ts) is a sample state
-    * `a` is a number provided by user
-    * `b` is a boolean which tells if `a` is divisible by 5
-    * async-reactivity components (`Ref`, `Computed`) are used to minimize recalculations (for example `b` in [state](packages/server/src/state.ts) is only recomputed if `a` is changed)
-* [server](packages/server/src/server.ts) sets everything up and takes care of `a` updates (HTTP PUT)
-* [http](packages/server/src/http.ts) and [socket](packages/server/src/socket.ts) illustrate sample query implementation
-    * There is not much sense to use `SampleQuery` in [http](packages/server/src/http.ts) in this sample. But it might be reasonable if reactivity is needed in server (for example push notification is pushed when inverted `b` becomes false)
+* [http/rest.ts](packages/server/src/http/rest.ts) takes care of HTTP REST mode
+* [http/query.ts](packages/server/src/http/query.ts) takes care of HTTP Query mode
+* [socket.ts](packages/server/src/socket.ts) takes care of Socket mode
+* [monitors.ts](packages/server/src/monitors.ts) illustrates query usage in server
 
 ## Web (browser)
 
-* [main.ts](packages/web/src/main.ts) mounts the app
-* [App.vue](packages/web/src/App.vue)
-    * **Input** section allows user to send `a` to server (global scope)
-    * **Query** section allows user to `invert` query result (query scope)
-* Both modes usage is very similar: [Http.vue](packages/web/src/Http.vue), [Socket.vue](packages/web/src/Socket.vue)
-    * `async-reactivity-vue` takes care of integration between `async-reactivity` and `@vue/reactivity`
-    * HTTP mode has **Invalidate** button as it is unknown when server state changes
-* [http](packages/web/src/http.ts) implementation performs fetch request
-* [socket](packages/web/src/socket.ts) implementation creates live query and uses `Connection`
+* [HttpRest.vue](packages/web/src/HttpRest.vue) illustrates HTTP REST mode
+* [Http.vue](packages/web/src/Http.vue) illustrates HTTP Query mode
+* [Socket.vue](packages/web/src/Socket.vue) illustrates Socket mode
+
+HTTP modes have **Invalidate** button as it is unknown when server state changes.
+
+`async-reactivity-vue` takes care of integration between `async-reactivity` and `@vue/reactivity`
 
 # Run
 
 Build
 
 ```bash
-cd packages/shared
+cd packages/business-logic
 pnpm run build
 cd ../server
 pnpm run build

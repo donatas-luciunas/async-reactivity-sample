@@ -45,7 +45,7 @@ export default (server: Server) => {
                 item[prop] = value;
             }
             
-            Data.writeItems();
+            Data.write();
 
             res.writeHead(204);
             res.end();
@@ -63,7 +63,7 @@ export default (server: Server) => {
             }
             items.splice(index, 1);
 
-            Data.writeItems();
+            Data.write();
 
             res.writeHead(204);
             res.end();

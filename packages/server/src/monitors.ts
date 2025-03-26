@@ -5,6 +5,7 @@ import { HttpSampleQuery, SocketSampleQuery } from "@async-reactivity-sample/bus
     const query = new HttpSampleQuery();
     query.token.value = 'server-token';
     query.filters.done.value = false;
+    
     new Watcher(query.items, async (itemsPromise) => {
         const items = await itemsPromise;
         const result = items.every(i => i.valid.value);
@@ -20,6 +21,7 @@ import { HttpSampleQuery, SocketSampleQuery } from "@async-reactivity-sample/bus
     const query = new SocketSampleQuery();
     query.token.value = Promise.resolve('server-token');
     query.filters.done.value = Promise.resolve(false);
+
     new Watcher(query.items, async (itemsPromise) => {
         const items = await itemsPromise;
         const result = items.every(i => i.valid.value);

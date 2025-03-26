@@ -26,7 +26,7 @@ export const get = async () => items;
 
 const subscribers = new Set<Function>();
 
-export const writeItems = async () => {
+export const write = async () => {
     for (const s of subscribers) {
         s();
     }
