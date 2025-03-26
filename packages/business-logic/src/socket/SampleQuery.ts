@@ -21,6 +21,6 @@ export default abstract class SampleQuery extends Query {
         this.items = this.register(new Computed(async value => {
             const dataItems = await value(this.dataItems);
             return dataItems.map(i => new Item(i));
-        }));
+        }, undefined, 5 * 1000));
     }
 }

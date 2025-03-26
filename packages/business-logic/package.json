@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async-reactivity": "^2.0.19",
-    "async-reactivity-net": "^2.0.2"
+    "async-reactivity": "^2.0.20",
+    "async-reactivity-net": "^2.0.3"
   }
 }

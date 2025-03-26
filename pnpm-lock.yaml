@@ -15,11 +15,11 @@ importers:
   packages/business-logic:
     dependencies:
       async-reactivity:
-        specifier: ^2.0.19
-        version: 2.0.19
+        specifier: ^2.0.20
+        version: 2.0.20
       async-reactivity-net:
-        specifier: ^2.0.2
-        version: 2.0.2
+        specifier: ^2.0.3
+        version: 2.0.3
 
   packages/server:
     dependencies:
@@ -27,11 +27,11 @@ importers:
         specifier: workspace:*
         version: link:../business-logic
       async-reactivity:
-        specifier: ^2.0.19
-        version: 2.0.19
+        specifier: ^2.0.20
+        version: 2.0.20
       async-reactivity-net:
-        specifier: ^2.0.2
-        version: 2.0.2
+        specifier: ^2.0.3
+        version: 2.0.3
       ws:
         specifier: ^8.18.0
         version: 8.18.0
@@ -49,11 +49,11 @@ importers:
         specifier: workspace:*
         version: link:../business-logic
       async-reactivity:
-        specifier: ^2.0.19
-        version: 2.0.19
+        specifier: ^2.0.20
+        version: 2.0.20
       async-reactivity-net:
-        specifier: ^2.0.2
-        version: 2.0.2
+        specifier: ^2.0.3
+        version: 2.0.3
       async-reactivity-vue:
         specifier: ^2.0.3
         version: 2.0.3
@@ -438,14 +438,14 @@ packages:
   alien-signals@0.4.14:
     resolution: {integrity: sha512-itUAVzhczTmP2U5yX67xVpsbbOiquusbWVyA9N+sy6+r6YVbFkahXvNCeEPWEOMhwDYwbVbGHFkVL03N9I5g+Q==}
 
-  async-reactivity-net@2.0.2:
-    resolution: {integrity: sha512-Lq1ztN18qNamm6bR3Oj/qvUzaO/xUd00ni0nL9bSR0JAx4h1diDTeoWlaPOhstNfLxKqPWi8p6XJNf6cxUlmwQ==}
+  async-reactivity-net@2.0.3:
+    resolution: {integrity: sha512-zC4obS4Lw27jRd49bISux2eQN2C/AUCuUfdOlD9h7dajtmcJTSlpqK/T8LyG5+lYwGfDZyfNHtq2thtKGn5O8A==}
 
   async-reactivity-vue@2.0.3:
     resolution: {integrity: sha512-UrYz1HfCKf5JyUXH5PsZDjs0Y3BIl25HyDgF+QEQcsp8y86Nsmk5qZmTSewZ0oWOqoQWei+kRUL9VdEKMp2cUg==}
 
-  async-reactivity@2.0.19:
-    resolution: {integrity: sha512-LfRgAucDexdk0eihRDNsO0hsPjx4OtOnCnl3Ny1CjOUlDKl9eLiwx9dqv2dfLPTvtgA16UkdvKfGEYE6EVf1lQ==}
+  async-reactivity@2.0.20:
+    resolution: {integrity: sha512-NXij0LvRhyMbS4WGQ9gSs1GSTrCqbCYJ/CKLl+kRVffygUWllMfrTAXxykpk4SHON+JpoECy5dHitzlllqaLJw==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -479,6 +479,9 @@ packages:
   he@1.2.0:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
+
+  lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
 
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
@@ -862,9 +865,9 @@ snapshots:
 
   alien-signals@0.4.14: {}
 
-  async-reactivity-net@2.0.2:
+  async-reactivity-net@2.0.3:
     dependencies:
-      async-reactivity: 2.0.19
+      async-reactivity: 2.0.20
       uuid: 11.1.0
       ws: 8.18.0
     transitivePeerDependencies:
@@ -873,7 +876,9 @@ snapshots:
 
   async-reactivity-vue@2.0.3: {}
 
-  async-reactivity@2.0.19: {}
+  async-reactivity@2.0.20:
+    dependencies:
+      lodash-es: 4.17.21
 
   balanced-match@1.0.2: {}
 
@@ -921,6 +926,8 @@ snapshots:
     optional: true
 
   he@1.2.0: {}
+
+  lodash-es@4.17.21: {}
 
   lodash@4.17.21: {}
 

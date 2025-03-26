@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@async-reactivity-sample/business-logic": "workspace:*",
-    "async-reactivity": "^2.0.19",
-    "async-reactivity-net": "^2.0.2",
+    "async-reactivity": "^2.0.20",
+    "async-reactivity-net": "^2.0.3",
     "async-reactivity-vue": "^2.0.3",
     "lodash": "^4.17.21",
     "vue": "^3.5.13",

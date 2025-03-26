@@ -43,7 +43,7 @@ export default class SampleQuery extends BaseSampleQuery {
             }
 
             return result;
-        }));
+        }, undefined, 5 * 1000));
     }
 
 }
