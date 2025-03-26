@@ -98,6 +98,8 @@ That's why it is reasonable to monitor query, not specific event.
 
 ## Socket mode
 
+Much more granular data transactions.
+
 `Computed`s keep `Listener`s alive for 3s after last usage (Collapse).
 
 There are no incoming messages about irrelevant changes:
