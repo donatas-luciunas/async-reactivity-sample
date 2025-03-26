@@ -12,6 +12,6 @@ export default class Item {
         this.text = new Ref(text);
         this.done = new Ref(done);
 
-        this.valid = new Computed(() => !!this.text);
+        this.valid = new Computed(value => !!value(this.text));
     }
 }

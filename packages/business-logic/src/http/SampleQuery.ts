@@ -4,9 +4,11 @@ import { DataItem } from "../data.js";
 import Item from "../Item.js";
 
 export default abstract class SampleQuery extends Query {
+    abstract readonly token: Dependency<string | undefined>;
+
     readonly filters: {
-        done: Ref<Promise<boolean | null>>;
-        text: Ref<Promise<string | null>>;
+        done: Ref<boolean | null>;
+        text: Ref<string | null>;
     };
 
     abstract readonly dataItems: Dependency<Promise<DataItem[]>>;
@@ -17,8 +19,8 @@ export default abstract class SampleQuery extends Query {
         super();
 
         this.filters = {
-            done: new Ref(Promise.resolve(null)),
-            text: new Ref(Promise.resolve(null))
+            done: new Ref(null),
+            text: new Ref(null)
         };
 
         this.items = this.register(new Computed(async value => {

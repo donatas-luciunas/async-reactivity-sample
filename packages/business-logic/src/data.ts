@@ -18,6 +18,6 @@ export const items: DataItem[] = [{
     done: false
 }, {
     id: 'd709de21-2f6a-466b-a660-c10cc879a420',
-    text: 'Task 4',
+    text: '',
     done: false
 }];

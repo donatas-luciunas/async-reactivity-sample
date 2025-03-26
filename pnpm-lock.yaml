@@ -15,28 +15,11 @@ importers:
   packages/business-logic:
     dependencies:
       async-reactivity:
-        specifier: ^2.0.18
-        version: 2.0.18
+        specifier: ^2.0.19
+        version: 2.0.19
       async-reactivity-net:
-        specifier: ^2.0.1
-        version: 2.0.1
-    devDependencies:
-      '@types/lodash':
-        specifier: ^4.17.16
-        version: 4.17.16
-
-  packages/monitor:
-    dependencies:
-      '@async-reactivity-sample/business-logic':
-        specifier: workspace:*
-        version: link:../business-logic
-      async-reactivity:
-        specifier: ^2.0.18
-        version: 2.0.18
-    devDependencies:
-      '@types/node':
-        specifier: ^22.13.11
-        version: 22.13.11
+        specifier: ^2.0.2
+        version: 2.0.2
 
   packages/server:
     dependencies:
@@ -44,11 +27,11 @@ importers:
         specifier: workspace:*
         version: link:../business-logic
       async-reactivity:
-        specifier: ^2.0.18
-        version: 2.0.18
+        specifier: ^2.0.19
+        version: 2.0.19
       async-reactivity-net:
-        specifier: ^2.0.1
-        version: 2.0.1
+        specifier: ^2.0.2
+        version: 2.0.2
       ws:
         specifier: ^8.18.0
         version: 8.18.0
@@ -66,18 +49,27 @@ importers:
         specifier: workspace:*
         version: link:../business-logic
       async-reactivity:
-        specifier: ^2.0.18
-        version: 2.0.18
+        specifier: ^2.0.19
+        version: 2.0.19
       async-reactivity-net:
-        specifier: ^2.0.1
-        version: 2.0.1
+        specifier: ^2.0.2
+        version: 2.0.2
       async-reactivity-vue:
         specifier: ^2.0.3
         version: 2.0.3
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.7.3)
+      vue-router:
+        specifier: ^4.5.0
+        version: 4.5.0(vue@3.5.13(typescript@5.7.3))
     devDependencies:
+      '@types/lodash':
+        specifier: ^4.17.16
+        version: 4.17.16
       '@vitejs/plugin-vue':
         specifier: ^5.2.1
         version: 5.2.1(vite@6.1.0(@types/node@22.13.11))(vue@3.5.13(typescript@5.7.3))
@@ -404,6 +396,9 @@ packages:
   '@vue/compiler-vue2@2.7.16':
     resolution: {integrity: sha512-qYC3Psj9S/mfu9uVi5WvNZIzq+xnXMhOwbTFKKDD7b1lhpnn71jXSFdTQ+WsIEk0ONCd7VV2IMm7ONl6tbQ86A==}
 
+  '@vue/devtools-api@6.6.4':
+    resolution: {integrity: sha512-sGhTPMuXqZ1rVOk32RylztWkfXTRhuS7vgAKv0zjqk8gbsHkJ7xfFf+jbySxt7tWObEJwyKaHMikV/WGDiQm8g==}
+
   '@vue/language-core@2.2.0':
     resolution: {integrity: sha512-O1ZZFaaBGkKbsRfnVH1ifOK1/1BUkyK+3SQsfnh6PmMmD4qJcTU8godCeA96jjDRTL6zgnK7YzCHfaUlH2r0Mw==}
     peerDependencies:
@@ -443,14 +438,14 @@ packages:
   alien-signals@0.4.14:
     resolution: {integrity: sha512-itUAVzhczTmP2U5yX67xVpsbbOiquusbWVyA9N+sy6+r6YVbFkahXvNCeEPWEOMhwDYwbVbGHFkVL03N9I5g+Q==}
 
-  async-reactivity-net@2.0.1:
-    resolution: {integrity: sha512-uSTERAyg7dQCqVdD1iJ/QJu3Y09VXpE3NoffARB8uFNfB4A2xcM/8MhNJfnst2uaDfE0YMj2BVNn6s+PhXwe2A==}
+  async-reactivity-net@2.0.2:
+    resolution: {integrity: sha512-Lq1ztN18qNamm6bR3Oj/qvUzaO/xUd00ni0nL9bSR0JAx4h1diDTeoWlaPOhstNfLxKqPWi8p6XJNf6cxUlmwQ==}
 
   async-reactivity-vue@2.0.3:
     resolution: {integrity: sha512-UrYz1HfCKf5JyUXH5PsZDjs0Y3BIl25HyDgF+QEQcsp8y86Nsmk5qZmTSewZ0oWOqoQWei+kRUL9VdEKMp2cUg==}
 
-  async-reactivity@2.0.18:
-    resolution: {integrity: sha512-SD5nEzuYzZzDb6ZQ0rWILjpkKgoSg/myEI2qMB3zOnDzNVjMMc1zyr/Bzds6Lelk94F4Kz9WjzN8sOhZ1CHK5w==}
+  async-reactivity@2.0.19:
+    resolution: {integrity: sha512-LfRgAucDexdk0eihRDNsO0hsPjx4OtOnCnl3Ny1CjOUlDKl9eLiwx9dqv2dfLPTvtgA16UkdvKfGEYE6EVf1lQ==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -484,6 +479,9 @@ packages:
   he@1.2.0:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
+
+  lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
@@ -573,6 +571,11 @@ packages:
 
   vscode-uri@3.1.0:
     resolution: {integrity: sha512-/BpdSx+yCQGnCvecbyXdxHDkuk55/G3xwnC0GqY4gmQ3j+A+g8kzzgB4Nk/SINjqn6+waqw3EgbVF2QKExkRxQ==}
+
+  vue-router@4.5.0:
+    resolution: {integrity: sha512-HDuk+PuH5monfNuY+ct49mNmkCRK4xJAV9Ts4z9UFc4rzdDnxQLyCMGGc8pKhZhHTVzfanpNwB/lwqevcBwI4w==}
+    peerDependencies:
+      vue: ^3.2.0
 
   vue-tsc@2.2.0:
     resolution: {integrity: sha512-gtmM1sUuJ8aSb0KoAFmK9yMxb8TxjewmxqTJ1aKphD5Cbu0rULFY6+UQT51zW7SpUcenfPUuflKyVwyx9Qdnxg==}
@@ -813,6 +816,8 @@ snapshots:
       de-indent: 1.0.2
       he: 1.2.0
 
+  '@vue/devtools-api@6.6.4': {}
+
   '@vue/language-core@2.2.0(typescript@5.7.3)':
     dependencies:
       '@volar/language-core': 2.4.11
@@ -857,9 +862,9 @@ snapshots:
 
   alien-signals@0.4.14: {}
 
-  async-reactivity-net@2.0.1:
+  async-reactivity-net@2.0.2:
     dependencies:
-      async-reactivity: 2.0.18
+      async-reactivity: 2.0.19
       uuid: 11.1.0
       ws: 8.18.0
     transitivePeerDependencies:
@@ -868,7 +873,7 @@ snapshots:
 
   async-reactivity-vue@2.0.3: {}
 
-  async-reactivity@2.0.18: {}
+  async-reactivity@2.0.19: {}
 
   balanced-match@1.0.2: {}
 
@@ -916,6 +921,8 @@ snapshots:
     optional: true
 
   he@1.2.0: {}
+
+  lodash@4.17.21: {}
 
   magic-string@0.30.17:
     dependencies:
@@ -982,6 +989,11 @@ snapshots:
       fsevents: 2.3.3
 
   vscode-uri@3.1.0: {}
+
+  vue-router@4.5.0(vue@3.5.13(typescript@5.7.3)):
+    dependencies:
+      '@vue/devtools-api': 6.6.4
+      vue: 3.5.13(typescript@5.7.3)
 
   vue-tsc@2.2.0(typescript@5.7.3):
     dependencies:

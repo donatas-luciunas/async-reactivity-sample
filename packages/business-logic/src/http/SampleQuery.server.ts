@@ -1,17 +1,25 @@
-import { Computed } from "async-reactivity";
+import { Computed, Ref } from "async-reactivity";
 import BaseSampleQuery from './SampleQuery.js';
 import { DataItem, items } from "../data.js";
 
 export default class SampleQuery extends BaseSampleQuery {
+    readonly token: Ref<string | undefined>;
+    
     readonly dataItems: Computed<Promise<DataItem[]>>;
 
     constructor() {
         super();
 
+        this.token = new Ref(undefined);
+
         this.dataItems = this.register(new Computed(async value => {
+            if (!value(this.token)) {
+                throw new Error('Unauthorized');
+            }
+
             const filters = {
-                done: await value(this.filters.done),
-                text: await value(this.filters.text)
+                done: value(this.filters.done),
+                text: value(this.filters.text)
             };
 
             let result = items;

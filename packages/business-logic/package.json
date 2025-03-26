@@ -2,8 +2,8 @@
   "name": "@async-reactivity-sample/business-logic",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/index.js",
-  "types": "types/index.js",
+  "main": "lib/index.node.js",
+  "types": "types/index.node.js",
   "browser": "lib/index.browser.js",
   "type": "module",
   "scripts": {
@@ -14,10 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async-reactivity": "^2.0.18",
-    "async-reactivity-net": "^2.0.1"
-  },
-  "devDependencies": {
-    "@types/lodash": "^4.17.16"
+    "async-reactivity": "^2.0.19",
+    "async-reactivity-net": "^2.0.2"
   }
 }

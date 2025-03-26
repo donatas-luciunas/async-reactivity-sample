@@ -4,6 +4,8 @@ import BaseSampleQuery from './SampleQuery.js';
 import { DataItem } from "../data.js";
 
 export default class SampleLiveQuery extends BaseSampleQuery implements LiveQuery {
+    readonly token: Ref<Promise<string>>;
+
     readonly dataItems: ConnectionListener<DataItem[], SampleLiveQuery>;
     
     readonly filters: {
@@ -13,6 +15,8 @@ export default class SampleLiveQuery extends BaseSampleQuery implements LiveQuer
 
     constructor(readonly connection: Connection, readonly id: string = newId()) {
         super();
+
+        this.token = new Ref(Promise.resolve('client-token'));
 
         this.filters = {
             done: new Ref(Promise.resolve(null)),

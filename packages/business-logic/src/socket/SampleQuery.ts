@@ -4,6 +4,8 @@ import { DataItem } from "../data.js";
 import Item from "../Item.js";
 
 export default abstract class SampleQuery extends Query {
+    abstract readonly token: Dependency<Promise<string>>;
+
     abstract readonly filters: {
         done: Dependency<Promise<boolean | null>>;
         text: Dependency<Promise<string | null>>;
