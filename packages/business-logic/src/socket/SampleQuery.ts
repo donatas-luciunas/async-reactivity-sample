@@ -55,6 +55,6 @@ export default abstract class SampleQuery extends Query {
             }
 
             return result;
-        }));
+        }, undefined, 5 * 1000));
     }
 }
