@@ -20,7 +20,8 @@
         <button style="margin-left: 10px;" @click="invalidate()">Invalidate</button>
     </div>
     <div v-if="show">
-        <Item v-for="item of items" :key="item.id.value" :item="item" />
+        <p>{{ counts.done }} done, {{ counts.notDone }} pending</p>
+        <Item v-for="item of items" :key="item.id" :item="item" />
     </div>
 </template>
 
@@ -54,6 +55,8 @@ class SampleQuery {
 
     readonly items: Computed<Promise<ItemEntity[]>>;
 
+    readonly counts: Computed<Promise<{ done: number; notDone: number }>>;
+
     constructor() {
         this.filters = {
             done: new Ref(null),
@@ -74,9 +77,39 @@ class SampleQuery {
             return result;
         });
 
-        this.items = new Computed(async value => {
+        this.items = new Computed(async (value, previousValue) => {
+            const previousItems = new Map(((await previousValue) ?? []).map(i => [i.id, i]));
             const dataItems = await value(this.dataItems);
-            return dataItems.map(i => new ItemEntity(i));
+            return dataItems.map(i => {
+                const item = previousItems.get(i.id);
+
+                if (item) {
+                    item.text.value = i.text;
+                    item.done.value = i.done;
+                    return item;
+                }
+
+                return new ItemEntity(i);
+            });
+        });
+
+        this.counts = new Computed(async (value) => {
+            const items = await value(this.items);
+
+            const result = {
+                done: 0,
+                notDone: 0
+            };
+
+            for (const i of items) {
+                if (value(i.done)) {
+                    result.done++;
+                } else {
+                    result.notDone++;
+                }
+            }
+
+            return result;
         });
     }
 }
@@ -85,6 +118,7 @@ const query = new SampleQuery();
 
 import { bindAwait } from 'async-reactivity-vue';
 const items = bindAwait(query.items, []).data;
+const counts = bindAwait(query.counts, { done: 0, notDone: 0 }).data;
 
 const invalidate = () => {
     query.dataItems.forceInvalidate();

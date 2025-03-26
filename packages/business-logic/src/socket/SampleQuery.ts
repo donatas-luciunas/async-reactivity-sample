@@ -15,12 +15,46 @@ export default abstract class SampleQuery extends Query {
 
     readonly items: Computed<Promise<Item[]>>;
 
+    readonly counts: Computed<Promise<{ done: number; notDone: number }>>;
+
     constructor() {
         super();
 
-        this.items = this.register(new Computed(async value => {
+        this.items = this.register(new Computed(async (value, previousValue) => {
+            const previousItems = new Map(((await previousValue) ?? []).map(i => [i.id, i]));
+
             const dataItems = await value(this.dataItems);
-            return dataItems.map(i => new Item(i));
+
+            return dataItems.map(i => {
+                const item = previousItems.get(i.id);
+
+                if (item) {
+                    item.text.value = i.text;
+                    item.done.value = i.done;
+                    return item;
+                }
+
+                return new Item(i);
+            });
         }, undefined, 5 * 1000));
+
+        this.counts = this.register(new Computed(async (value) => {
+            const items = await value(this.items);
+
+            const result = {
+                done: 0,
+                notDone: 0
+            };
+
+            for (const i of items) {
+                if (value(i.done)) {
+                    result.done++;
+                } else {
+                    result.notDone++;
+                }
+            }
+
+            return result;
+        }));
     }
 }
