@@ -17,7 +17,6 @@
     <h2>Items</h2>
     <div>
         <button @click="show = !show">{{ show ? 'Collapse' : 'Expand' }}</button>
-        <button style="margin-left: 10px;" @click="dispose()">Dispose</button>
     </div>
     <div v-if="show">
         <Item v-for="item of items" :key="item.id.value" :item="item" />
@@ -46,10 +45,6 @@ import { query } from './socket.js';
 
 import { bindAwait } from 'async-reactivity-vue';
 const items = bindAwait(query.items, []).data;
-
-const dispose = () => {
-    query.items.dispose();
-};
 
 import Item from './Item.vue';
 </script>
