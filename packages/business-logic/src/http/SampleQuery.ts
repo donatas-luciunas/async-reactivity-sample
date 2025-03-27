@@ -15,7 +15,7 @@ export default abstract class SampleQuery extends Query {
 
     readonly items: Computed<Promise<Item[]>>;
 
-    constructor() {
+    constructor(createItem: (id: DataItem) => Item) {
         super();
 
         this.filters = {
@@ -37,7 +37,7 @@ export default abstract class SampleQuery extends Query {
                     return item;
                 }
 
-                return new Item(i);
+                return createItem(i);
             });
         }, undefined, 3 * 1000);
     }

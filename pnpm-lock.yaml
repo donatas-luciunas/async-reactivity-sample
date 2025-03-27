@@ -20,6 +20,9 @@ importers:
       async-reactivity-net:
         specifier: ^2.0.4
         version: 2.0.4
+      async-reactivity-vue:
+        specifier: ^2.0.3
+        version: 2.0.3
 
   packages/server:
     dependencies:

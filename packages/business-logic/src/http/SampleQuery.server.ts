@@ -1,6 +1,7 @@
 import { Computed, Ref } from "async-reactivity";
 import BaseSampleQuery from './SampleQuery.js';
 import { DataItem, list, subscribe, unsubscribe } from "../data.js";
+import Item from "./Item.js";
 
 export default class SampleQuery extends BaseSampleQuery {
     readonly token: Ref<string | undefined>;
@@ -9,7 +10,7 @@ export default class SampleQuery extends BaseSampleQuery {
     readonly dataItemsInvalidate: Function;
 
     constructor() {
-        super();
+        super(item => new Item(item));
 
         this.token = new Ref(undefined);
 

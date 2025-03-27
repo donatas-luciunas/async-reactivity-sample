@@ -16,12 +16,7 @@ const props = defineProps<{
     item: Item
 }>();
 
-import { bindAwait } from 'async-reactivity-vue';
-const item = {
-    text: bindAwait(props.item.text, '').data,
-    done: bindAwait(props.item.done, false).data,
-    valid: bindAwait(props.item.valid, true).data,
-};
+const item = props.item.vue;
 
 import { ref, watch } from 'vue';
 const text = ref('');
@@ -30,15 +25,15 @@ const valid = ref(true);
 
 watch(item.text, (value) => {
     text.value = value;
-});
+}, { immediate: true });
 
 watch(item.done, (value) => {
     done.value = value;
-});
+}, { immediate: true });
 
 watch(item.valid, (value) => {
     valid.value = value;
-});
+}, { immediate: true });
 
 const updateText = async () =>
     fetch(`http://localhost:8080/items/${props.item.id}?token=client-token`, {

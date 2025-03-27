@@ -1,8 +1,8 @@
 import { Computed, Ref } from "async-reactivity";
+import { FetchBody, FetchQuery, FetchComputed } from 'async-reactivity-net';
 import BaseSampleQuery from './SampleQuery.js';
+import Item from "./Item.browser.js";
 import { DataItem } from "../data.js";
-import { FetchBody, FetchQuery } from 'async-reactivity-net';
-import { FetchComputed } from "async-reactivity-net";
 
 export default class SampleQuery extends BaseSampleQuery implements FetchQuery {
     readonly token: Ref<string>;
@@ -10,7 +10,7 @@ export default class SampleQuery extends BaseSampleQuery implements FetchQuery {
     readonly dataItems: Computed<Promise<DataItem[]>>;
 
     constructor() {
-        super();
+        super(item => new Item(item));
 
         this.token = new Ref('client-token');
 
