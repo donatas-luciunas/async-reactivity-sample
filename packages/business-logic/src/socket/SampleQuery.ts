@@ -2,12 +2,14 @@ import { Computed, Dependency } from "async-reactivity";
 import { Query } from "async-reactivity-net";
 import Item from "./Item.js";
 
+type Promisable<T> = Promise<T> | T;
+
 export default abstract class SampleQuery extends Query {
-    abstract readonly token: Dependency<Promise<string>>;
+    abstract readonly token: Dependency<Promisable<string>>;
 
     abstract readonly filters: {
-        done: Dependency<Promise<boolean | null>>;
-        text: Dependency<Promise<string | null>>;
+        done: Dependency<Promisable<boolean | null>>;
+        text: Dependency<Promisable<string | null>>;
     };
 
     abstract readonly dataItems: Dependency<Promise<string[]>>;

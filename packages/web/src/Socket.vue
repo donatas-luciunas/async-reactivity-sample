@@ -29,14 +29,14 @@ import { debounce } from 'lodash-es';
 
 const text = ref('');
 watch(text, debounce(() => {
-    query.filters.text.value = Promise.resolve(text.value.trim());
+    query.filters.text.value = text.value.trim();
 }, 500));
 
 const doneFilter = ref(false);
 const doneValue = ref(false);
 
 watch([doneFilter, doneValue], ([filter, value]) => {
-    query.filters.done.value = Promise.resolve(filter ? value : null);
+    query.filters.done.value = filter ? value : null;
 });
 
 const show = ref(false);

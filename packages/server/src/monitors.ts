@@ -19,8 +19,8 @@ import { HttpSampleQuery, SocketSampleQuery } from "@async-reactivity-sample/bus
 
 {
     const query = new SocketSampleQuery();
-    query.token.value = Promise.resolve('server-token');
-    query.filters.done.value = Promise.resolve(false);
+    query.token.value = 'server-token';
+    query.filters.done.value = false;
 
     new Watcher(query.items, async (itemsPromise) => {
         const items = await itemsPromise;

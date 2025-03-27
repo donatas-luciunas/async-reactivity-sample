@@ -54,7 +54,7 @@ Code is not shared between modes.
 Shared code among server and web.
 
 * [data.ts](packages/business-logic/src/data.ts) (server-only) is a in-memory database. It provides `get`, `write`, `subscribe`, `unsubscribe` methods.
-* [http/Item.ts](packages/business-logic/src/http/Item.ts) and [socket/Item.ts](packages/business-logic/src/socket/Item.ts) ([browser](packages/business-logic/src/socket/Item.browser.ts), [server](packages/business-logic/src/socket/Item.server.ts)) are todo item entity classes
+* [http/Item.ts](packages/business-logic/src/http/Item.ts) ([browser](packages/business-logic/src/http/Item.browser.ts)) and [socket/Item.ts](packages/business-logic/src/socket/Item.ts) ([browser](packages/business-logic/src/socket/Item.browser.ts), [server](packages/business-logic/src/socket/Item.server.ts)) are todo item entity classes
 * [http](packages/business-logic/src/http) illustrates HTTP Query mode
   * [SampleQuery.ts](packages/business-logic/src/http/SampleQuery.ts) - shared code
   * [SampleQuery.browser.ts](packages/business-logic/src/http/SampleQuery.browser.ts) - browser version

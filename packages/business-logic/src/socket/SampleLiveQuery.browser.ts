@@ -4,23 +4,23 @@ import BaseSampleQuery from './SampleQuery.js';
 import Item from './Item.browser.js';
 
 export default class SampleLiveQuery extends BaseSampleQuery implements LiveQuery {
-    readonly token: Ref<Promise<string>>;
+    readonly token: Ref<string>;
 
     readonly dataItems: ConnectionListener<string[], SampleLiveQuery>;
     
     readonly filters: {
-        done: Ref<Promise<boolean | null>>;
-        text: Ref<Promise<string | null>>;
+        done: Ref<boolean | null>;
+        text: Ref<string | null>;
     };
 
     constructor(readonly connection: Connection, readonly id: string = newId()) {
         super(id => new Item(this, id));
 
-        this.token = new Ref(Promise.resolve('client-token'));
+        this.token = new Ref('client-token');
 
         this.filters = {
-            done: new Ref(Promise.resolve(null)),
-            text: new Ref(Promise.resolve(null))
+            done: new Ref(null),
+            text: new Ref(null)
         };
 
         this.dataItems = new ConnectionListener(this, async q => q.dataItems);

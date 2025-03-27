@@ -1,4 +1,4 @@
-import { Computed, Dependency, Ref } from "async-reactivity";
+import { Computed, Dependency } from "async-reactivity";
 
 export default abstract class Item {
     readonly id: string;
