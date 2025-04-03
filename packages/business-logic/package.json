@@ -3,8 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "lib/index.node.js",
-  "types": "types/index.node.js",
+  "types": "types/index.node.d.js",
   "browser": "lib/index.browser.js",
+  "typesVersions": {
+    "browser": {
+      "*": [
+        "dist/index.browser.d.ts"
+      ]
+    }
+  },
   "type": "module",
   "scripts": {
     "dev": "tsc -p src -w",
@@ -15,7 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "async-reactivity": "^2.0.20",
-    "async-reactivity-net": "^2.0.4",
+    "async-reactivity-net": "^2.0.5",
     "async-reactivity-vue": "^2.0.3"
   }
 }

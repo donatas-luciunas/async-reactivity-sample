@@ -54,8 +54,6 @@ class SampleQuery {
 
     readonly items: Computed<Promise<ItemEntity[]>>;
 
-    readonly counts: Computed<Promise<{ done: number; notDone: number }>>;
-
     constructor() {
         this.filters = {
             done: new Ref(null),
