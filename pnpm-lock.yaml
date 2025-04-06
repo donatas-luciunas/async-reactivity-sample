@@ -18,8 +18,8 @@ importers:
         specifier: ^2.0.21
         version: 2.0.21
       async-reactivity-net:
-        specifier: ^2.0.6
-        version: 2.0.6
+        specifier: ^2.0.7
+        version: 2.0.7
       async-reactivity-vue:
         specifier: ^2.0.3
         version: 2.0.3
@@ -33,8 +33,8 @@ importers:
         specifier: ^2.0.21
         version: 2.0.21
       async-reactivity-net:
-        specifier: ^2.0.6
-        version: 2.0.6
+        specifier: ^2.0.7
+        version: 2.0.7
       ws:
         specifier: ^8.18.0
         version: 8.18.0
@@ -55,8 +55,8 @@ importers:
         specifier: ^2.0.21
         version: 2.0.21
       async-reactivity-net:
-        specifier: ^2.0.6
-        version: 2.0.6
+        specifier: ^2.0.7
+        version: 2.0.7
       async-reactivity-vue:
         specifier: ^2.0.3
         version: 2.0.3
@@ -444,8 +444,8 @@ packages:
   alien-signals@0.4.14:
     resolution: {integrity: sha512-itUAVzhczTmP2U5yX67xVpsbbOiquusbWVyA9N+sy6+r6YVbFkahXvNCeEPWEOMhwDYwbVbGHFkVL03N9I5g+Q==}
 
-  async-reactivity-net@2.0.6:
-    resolution: {integrity: sha512-6ix8KQjB1nTK6fASbLeJY4WAz06OS4PRhIpKw+gYkiWyeoYQ8MIJQ8eKSnaZM+b1YghyroGm47jyA3olAIBVng==}
+  async-reactivity-net@2.0.7:
+    resolution: {integrity: sha512-tvY25JtJ5L7BLpqAcPOINWSqe37KYs6pw2jbtPv28gXugLdHUIMR8vprtU87wH+rnpMq6bVSgIg2goY70J0k0A==}
 
   async-reactivity-vue@2.0.3:
     resolution: {integrity: sha512-UrYz1HfCKf5JyUXH5PsZDjs0Y3BIl25HyDgF+QEQcsp8y86Nsmk5qZmTSewZ0oWOqoQWei+kRUL9VdEKMp2cUg==}
@@ -872,7 +872,7 @@ snapshots:
 
   alien-signals@0.4.14: {}
 
-  async-reactivity-net@2.0.6:
+  async-reactivity-net@2.0.7:
     dependencies:
       async-reactivity: 2.0.21
       uuid: 11.1.0
