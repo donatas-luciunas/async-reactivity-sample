@@ -22,13 +22,14 @@ export default class SampleQuery extends BaseSampleQuery implements FetchQuery {
         });
     }
 
-    async fetch<T>(body: FetchBody) {
+    async fetch<T>(body: FetchBody, abortSignal: AbortSignal) {
         const response = await fetch('http://localhost:8080/query', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            signal: abortSignal
         });
         const result = await response.json();
         return result as T;
