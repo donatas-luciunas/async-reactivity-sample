@@ -17,6 +17,7 @@ HTTP Query needs to be used in browser and server and it provides even more bene
 * Browser and server shared types and logic
 * Query usage in server
 * Query takes care of communication between browser and server (API)
+* Fetch is aborted if invalidated during request / response round trip (easy to notice clicking "Invalidate" button with network throttling turned on)
 * Easier to test
 
 ## Socket

@@ -15,8 +15,8 @@ importers:
   packages/business-logic:
     dependencies:
       async-reactivity:
-        specifier: ^2.0.22
-        version: 2.0.22
+        specifier: ^2.0.23
+        version: 2.0.23
       async-reactivity-net:
         specifier: ^2.0.11
         version: 2.0.11
@@ -30,8 +30,8 @@ importers:
         specifier: workspace:*
         version: link:../business-logic
       async-reactivity:
-        specifier: ^2.0.22
-        version: 2.0.22
+        specifier: ^2.0.23
+        version: 2.0.23
       async-reactivity-net:
         specifier: ^2.0.11
         version: 2.0.11
@@ -52,8 +52,8 @@ importers:
         specifier: workspace:*
         version: link:../business-logic
       async-reactivity:
-        specifier: ^2.0.22
-        version: 2.0.22
+        specifier: ^2.0.23
+        version: 2.0.23
       async-reactivity-net:
         specifier: ^2.0.11
         version: 2.0.11
@@ -450,8 +450,8 @@ packages:
   async-reactivity-vue@2.0.3:
     resolution: {integrity: sha512-UrYz1HfCKf5JyUXH5PsZDjs0Y3BIl25HyDgF+QEQcsp8y86Nsmk5qZmTSewZ0oWOqoQWei+kRUL9VdEKMp2cUg==}
 
-  async-reactivity@2.0.22:
-    resolution: {integrity: sha512-9v0hGM8q1uczzeWqwBfaJdPtei1a09CAWwGEPeCQaNsOSDGsEsBa2rmib3RRyTwO9Gg75+R1fNwPDtOru1CnPA==}
+  async-reactivity@2.0.23:
+    resolution: {integrity: sha512-SZoOFi2gzDoHKSxMXWOCoh9NXL1gIIdnhmLlHVn1tF22agbPv+T/81yuD9dKU30icCoq81JDJw50y+6giE5DXA==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -874,7 +874,7 @@ snapshots:
 
   async-reactivity-net@2.0.11:
     dependencies:
-      async-reactivity: 2.0.22
+      async-reactivity: 2.0.23
       uuid: 11.1.0
       ws: 8.18.0
     transitivePeerDependencies:
@@ -883,7 +883,7 @@ snapshots:
 
   async-reactivity-vue@2.0.3: {}
 
-  async-reactivity@2.0.22:
+  async-reactivity@2.0.23:
     dependencies:
       lodash-es: 4.17.21
 
