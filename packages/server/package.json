@@ -16,11 +16,11 @@
   "dependencies": {
     "@async-reactivity-sample/business-logic": "workspace:*",
     "async-reactivity": "^2.0.23",
-    "async-reactivity-net": "^2.0.11",
-    "ws": "^8.18.2"
+    "async-reactivity-net": "^2.0.12",
+    "ws": "^8.19.0"
   },
   "devDependencies": {
-    "@types/node": "^22.15.30",
+    "@types/node": "^22.19.7",
     "@types/ws": "^8.18.1"
   }
 }
