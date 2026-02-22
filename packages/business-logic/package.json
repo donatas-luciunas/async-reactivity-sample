@@ -21,8 +21,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async-reactivity": "^2.0.23",
-    "async-reactivity-net": "^2.0.12",
-    "async-reactivity-vue": "^2.0.5"
+    "async-reactivity": "^2.0.25",
+    "async-reactivity-net": "^2.0.13",
+    "async-reactivity-vue": "^2.0.6"
   }
 }
