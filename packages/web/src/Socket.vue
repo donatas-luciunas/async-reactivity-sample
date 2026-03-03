@@ -54,8 +54,8 @@ const query = (() => {
     return query;
 })();
 
-import { bindAwait } from 'async-reactivity-vue';
-const items = bindAwait(query.items, []).data;
+import { bindAsync } from 'async-reactivity-vue';
+const items = bindAsync(query.items, []).data;
 
 import Item from './Item.vue';
 </script>

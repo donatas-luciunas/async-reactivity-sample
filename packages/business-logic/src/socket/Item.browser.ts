@@ -1,7 +1,7 @@
 import { ConnectionListener } from "async-reactivity-net";
 import BaseItem from './Item.js';
 import SampleLiveQuery from "./SampleLiveQuery.browser.js";
-import { bindAwait } from "async-reactivity-vue";
+import { bindAsync } from "async-reactivity-vue";
 
 export default class Item extends BaseItem {
     readonly text: ConnectionListener<string | undefined, SampleLiveQuery>;
@@ -9,9 +9,9 @@ export default class Item extends BaseItem {
 
     readonly vue: {
         id: string;
-        text: ReturnType<typeof bindAwait<string | undefined>>['data'];
-        done: ReturnType<typeof bindAwait<boolean | undefined>>['data'];
-        valid: ReturnType<typeof bindAwait<boolean>>['data'];
+        text: ReturnType<typeof bindAsync<string | undefined>>['data'];
+        done: ReturnType<typeof bindAsync<boolean | undefined>>['data'];
+        valid: ReturnType<typeof bindAsync<boolean>>['data'];
     }
 
     constructor(liveQuery: SampleLiveQuery, id: string) {
@@ -23,9 +23,9 @@ export default class Item extends BaseItem {
 
         this.vue = {
             id,
-            text: bindAwait(this.text, '').data,
-            done: bindAwait(this.done, false).data,
-            valid: bindAwait(this.valid, true).data,
+            text: bindAsync(this.text, '').data,
+            done: bindAsync(this.done, false).data,
+            valid: bindAsync(this.valid, true).data,
         };
     }
 }

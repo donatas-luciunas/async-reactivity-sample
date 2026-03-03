@@ -45,8 +45,8 @@ const show = ref(false);
 import { HttpSampleQuery } from '@async-reactivity-sample/business-logic';
 const query = new HttpSampleQuery();
 
-import { bindAwait } from 'async-reactivity-vue';
-const items = bindAwait(query.items, []).data;
+import { bindAsync } from 'async-reactivity-vue';
+const items = bindAsync(query.items, []).data;
 
 const invalidate = () => {
     query.dataItems.forceInvalidate();
