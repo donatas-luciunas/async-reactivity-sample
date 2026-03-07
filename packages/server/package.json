@@ -15,12 +15,12 @@
   "license": "ISC",
   "dependencies": {
     "@async-reactivity-sample/business-logic": "workspace:*",
-    "async-reactivity": "^2.0.27",
-    "async-reactivity-net": "^2.0.15",
+    "async-reactivity": "^2.0.28",
+    "async-reactivity-net": "^2.0.16",
     "ws": "^8.19.0"
   },
   "devDependencies": {
-    "@types/node": "^24.11.0",
+    "@types/node": "^24.12.0",
     "@types/ws": "^8.18.1"
   }
 }

@@ -5,6 +5,8 @@ import Item from "./Item.js";
 type Promisable<T> = Promise<T> | T;
 
 export default abstract class SampleQuery extends Query {
+    static readonly type = 'SampleQuery';
+
     abstract readonly token: Dependency<Promisable<string>>;
 
     abstract readonly filters: {
