@@ -22,7 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "async-reactivity": "^2.2.2",
-    "async-reactivity-net": "^2.0.18",
+    "async-reactivity-net": "^2.0.19",
     "async-reactivity-vue": "^2.0.7"
   }
 }
