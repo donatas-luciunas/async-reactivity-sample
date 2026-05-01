@@ -10,9 +10,9 @@ import { HttpSampleQuery, SocketSampleQuery } from "@async-reactivity-sample/bus
         const items = await itemsPromise;
         const result = items.every(i => i.valid.value);
         if (!result) {
-            console.warn('Invalid undone items exist');
+            console.warn('Http | Invalid undone items exist');
         } else {
-            console.log('All good');
+            console.log('Http | All good');
         }
     });
 }
@@ -27,9 +27,9 @@ import { HttpSampleQuery, SocketSampleQuery } from "@async-reactivity-sample/bus
         const validity = await Promise.all(items.map(i => i.valid.value));
         const result = validity.every(v => v);
         if (!result) {
-            console.warn('Invalid undone items exist');
+            console.warn('Socket | Invalid undone items exist');
         } else {
-            console.log('All good');
+            console.log('Socket | All good');
         }
     });
 }
