@@ -18,7 +18,7 @@ export default class SampleQuery extends BaseSampleQuery implements FetchQuery {
             q.token.value = value(this.token);
             q.filters.done.value = value(this.filters.done);
             q.filters.text.value = value(this.filters.text);
-            return q.dataItems;
+            return q.dataItems.value;
         });
     }
 
